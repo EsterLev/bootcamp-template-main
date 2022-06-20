@@ -74,7 +74,7 @@ const getusersList = () => {
                 table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
-                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th>
+                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th></br>
              </tr>`
             })
             const container = document.querySelector('.ShowUser');
@@ -111,8 +111,9 @@ class Manager {
 
     //delete product from the product array
     DeleteUser(id) {
-        const arr = this.#usersList.filter(c => c.getId != id);
-        this.#usersList = arr;
+        // const arr = this.#usersList.filter(c => c.getId != id);
+        // this.#usersList = arr;
+        delete this.#usersList[id]
     }
 }
 
