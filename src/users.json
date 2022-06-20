@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "firstName": "Shira",
+            "lastName": "Sharabani",
+            "address":{"city":"Modiin-Ilit","street":"sd.yechzkel","number":"5"},
+            "phone":"0556796376",
+            "email":"shirasharabani@gmail.com",
+            "height":"1.70",
+            "weight":[
+                60,58,56
+            ]
+        },
+        {
+            "firstName": "Esti",
+            "lastName": "Lev",
+            "address":{"city":"Modiin-Ilit","street":"Netinot Hamishpat","number":"18"},
+            "phone":"0583281357",
+            "email":"st3281357@gmail.com",
+            "height":"1.62",
+            "weight":[
+                60,58,56
+            ]
+        }
+    ]
+}
