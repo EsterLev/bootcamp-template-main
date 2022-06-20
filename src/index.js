@@ -169,10 +169,8 @@ btnUpdate.onclick = () => {
 }
 
 //on delete click
-btnDelete.onclick = () => {
-    Id = document.querySelector('#idDelete');
-    m.DeleteUser(parseInt(Id.value));
-    console.log(m.getusersList);
+btnDelete.onclick = (id) => {
+    DeleteUser(id);
 }
 
 showUserById.onclick = () => {
