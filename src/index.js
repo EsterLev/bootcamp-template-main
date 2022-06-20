@@ -170,17 +170,15 @@ btnUpdate.onclick = () => {
 //on delete click
 btnDelete.onclick = () => {
     Id = document.querySelector('#idDelete');
-    m.DeleteUser(parseInt(Id.value));
-    console.log(m.getusersList);
+
 }
 
 showUserById.onclick = () => {
     id = idShow.value;
     usersList.users.forEach(user => {
-        console.log(user);
         if (user.id === parseInt(id)) {
-            newUser = new User(user.firstName, user.weight);
-            newUser.ShowUser(user);
+            //newUser = new User(user.firstName, user.weight);
+            user.ShowUser(user);
         }
     })
 }
