@@ -163,9 +163,18 @@ btnUpdate.onclick = () => {
     console.log(u);
 }
 
+
 //on delete click
 btnDelete.onclick = (id) => {
-    delete usersList[id]
+    for(let i=0; i<users.lengthl;i++){
+       console.log("id delete is working");
+        if (user.id===parseInt(id)){
+            delete usersList[i];
+        } 
+    }
+    console.log("deleted succesfully!")
+    console.log(usersList.users)
+    
 }
 
 showUserById.onclick = () => {
