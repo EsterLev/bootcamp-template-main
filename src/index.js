@@ -109,12 +109,7 @@ class Manager {
         return this.#usersList.push(user);
     }
 
-    //delete product from the product array
-    DeleteUser(id) {
-        // const arr = this.#usersList.filter(c => c.getId != id);
-        // this.#usersList = arr;
-        delete this.#usersList[id]
-    }
+ 
 }
 
 const btnAdd = document.querySelector('#btnAdd');
@@ -170,7 +165,7 @@ btnUpdate.onclick = () => {
 
 //on delete click
 btnDelete.onclick = (id) => {
-    DeleteUser(id);
+    delete this.#usersList[id]
 }
 
 showUserById.onclick = () => {
