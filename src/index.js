@@ -173,8 +173,7 @@ btnDelete.onclick = (id) => {
         } 
     }
     console.log("deleted succesfully!")
-    console.log(usersList.users)
-    
+    console.log(usersList.users) 
 }
 
 showUserById.onclick = () => {
