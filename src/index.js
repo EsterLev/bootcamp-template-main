@@ -106,7 +106,7 @@ class Manager {
     // }
     //pushing to the products id
     AddUser(user) {
-        return this.#usersList.push(user);
+        return usersList.push(user);
     }
 
  
