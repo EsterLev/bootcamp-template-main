@@ -1,6 +1,7 @@
 {
     "users": [
         {
+            "id":1,
             "firstName": "Shira",
             "lastName": "Sharabani",
             "address":{"city":"Modiin-Ilit","street":"sd.yechzkel","number":"5"},
@@ -12,6 +13,7 @@
             ]
         },
         {
+            "id":2,
             "firstName": "Esti",
             "lastName": "Lev",
             "address":{"city":"Modiin-Ilit","street":"Netinot Hamishpat","number":"18"},
