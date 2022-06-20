@@ -165,7 +165,7 @@ btnUpdate.onclick = () => {
 
 //on delete click
 btnDelete.onclick = (id) => {
-    delete this.#usersList[id]
+    delete usersList[id]
 }
 
 showUserById.onclick = () => {
