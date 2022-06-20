@@ -41,8 +41,27 @@ class User {
             const div2 = document.createElement('div');
             const div3 = document.createElement('div');
             const span = document.createElement('span');
+            const address = document.createElement('span');
+            const city = document.createElement('span');
+            const street = document.createElement('span');
+            const number = document.createElement('span');
+            const span2 = document.createElement('span');
+            const phonespan = document.createElement('span');
+            const emailspan = document.createElement('span');
             span.innerHTML = user.firstName+ ' '+user.lastName;
+            city.innerHTML = user.address.city;
+            street.innerHTML = user.address.street;
+            number.innerHTML = user.address.number;
+            address.append(city);
+            address.append(street);
+            address.append(number);
+            phonespan.innerHTML = user.phone;
+            emailspan.innerHTML = user.email;
             div3.append(span);
+            div3.append(span2);
+            div3.append(address);
+            div3.append(phonespan);
+            div3.append(emailspan);
             const h5 = document.createElement('h5');
             h5.innerHTML = 'id:' + user.id;
             div3.append(h5);
@@ -74,7 +93,7 @@ const getusersList = () => {
                 table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
-                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th>
+                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
              </tr>`
             })
             const container = document.querySelector('.ShowUser');
@@ -177,8 +196,8 @@ showUserById.onclick = () => {
     id = idShow.value;
     usersList.users.forEach(user => {
         if (user.id === parseInt(id)) {
-            //newUser = new User(user.firstName, user.weight);
-            user.ShowUser(user);
+            newUser = new User(user.firstName, user.weight);
+            newUser.ShowUser(user);
         }
     })
 }
