@@ -48,7 +48,7 @@ class User {
             const span2 = document.createElement('span');
             const phonespan = document.createElement('span');
             const emailspan = document.createElement('span');
-            span.innerHTML = user.firstName+ ' '+user.lastName;
+            span.innerHTML = user.firstName + ' ' + user.lastName;
             city.innerHTML = user.address.city;
             street.innerHTML = user.address.street;
             number.innerHTML = user.address.number;
@@ -66,7 +66,7 @@ class User {
             h5.innerHTML = 'id:' + user.id;
             div3.append(h5);
             const h = document.createElement('h6');
-            h.innerHTML = 'weight' + user.weight[user.weight.length-1];
+            h.innerHTML = 'weight' + user.weight[user.weight.length - 1];
             div3.append(h);
             div2.append(div3);
             const div4 = document.createElement('div');
@@ -105,7 +105,7 @@ const getusersList = () => {
 class Manager {
 
     //ShowProducts = document.querySelector('.ShowProducts');
-
+    #filterUsers;
     #usersList;
 
     constructor() {
@@ -125,13 +125,72 @@ class Manager {
     // }
     //pushing to the products id
     AddUser(user) {
-        return this.#usersList.push(user);
+        return usersList.push(user);
     }
 
-    //delete product from the product array
-    DeleteUser(id) {
-        const arr = this.#usersList.filter(c => c.getId != id);
-        this.#usersList = arr;
+    ShowFilterUsers(user) {
+        u = this.#filterUsers.forEach(us => {
+            // if (us === user) {
+            //     break;
+            // }
+        })
+        this.#filterUsers.push(user);
+    }
+
+    printUsers() {
+        let table = '';
+        usersList.users.forEach(user => {
+            console.log(user);
+            table += `
+         <tr>
+             <th>${user.firstName + ' ' + user.lastName}</th>
+             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+         </tr>`
+        })
+        const container = document.querySelector('.ShowUser');
+        container.innerHTML += table;
+    }
+
+    search(val) {
+        search = document.querySelector("#search");
+        searchBtn = document.querySelector("#searchBtn");
+        usersList.users.forEach(user => {
+            console.log(user);
+            if (user.firstName === val) {
+                newUser = new User(user.firstName, user.lastName);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.lastName === val) {
+                newUser = new User(user.firstName, user.lastName);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.email === val) {
+                newUser = new User(user.firstName, user.lastName, user.email);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.phone === val) {
+                newUser = new User(user.firstName, user.lastName, user.phone);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.address.city === val) {
+                newUser = new User(user.firstName, user.lastName, user.address);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.address.street === val) {
+                newUser = new User(user.firstName, user.lastName, user.address);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.address.number === val) {
+                newUser = new User(user.firstName, user.lastName, user.address);
+                newUser.ShowFilterUsers(user);
+            }
+            if (user.address === val) {
+                newUser = new User(user.firstName, user.lastName, user.address);
+                newUser.ShowFilterUsers(user);
+            }
+            this.printUsers();
+        }
+        )
     }
 }
 
@@ -143,6 +202,16 @@ const UserWeight = document.querySelector('#UserWeight');
 const showUserById = document.querySelector('#showUserById');
 const idShow = document.querySelector('#idShow');
 const showAll = document.querySelector('#showAllUsers')
+const searchBtn = document.querySelector("#searchBtn");
+
+const firstNameSearch = document.querySelector('#firstNameSearch');
+const idSearch = document.querySelector('#idSearch');
+const lastNameSearch = document.querySelector('#lastNameSearch');
+const citySearch = document.querySelector('#lastNameSearch');
+const streetSearch = document.querySelector('#streetSearch');
+const numberSearch = document.querySelector('#numberSearch');
+
+
 
 //keeps the data in a global variable
 const usersList = {
@@ -151,46 +220,45 @@ const usersList = {
 
 getusersList();
 
+// btnAdd.onclick = () => {
+//     console.log("dfehu")
+//     u = new User(UserName.value, UserWeight.value);
+//     //m.AddUser(u);
+//     const Request = new XMLHttpRequest();
+//     Request.open('POST', './users.json', true);
+//     xhr.setRequestHeader('Content-type', u);
+//     xhr.onload = function () {
+//         // do something to response
+//         console.log(this.responseText);
+//     };
 
-// showAll.onclick = () => {
-//     // d=usersList.users
-//     // showAllUsersFromUser= d.map(u=>u.ShowUser());
-//     console.log("enter to showAll onclick")
 // }
 
-btnAdd.onclick = () => {
-    console.log("dfehu")
-    u = new User(UserName.value, UserWeight.value);
-    //m.AddUser(u);
-    const Request = new XMLHttpRequest();
-    Request.open('POST', './users.json', true);
-    xhr.setRequestHeader('Content-type', u);
-    xhr.onload = function () {
-        // do something to response
-        console.log(this.responseText);
-    };
-    // xhr.send('user=person&pwd=password&organization=place&requiredkey=key');
-    // Request.send();
-    // Request.onload = () => {
-    //     console.log("-------");
-    //     req=Request.response
-    //     console.log(req);
-    // }
-}
+// btnUpdate.onclick = () => {
+//     Id = document.querySelector('#id');
+//     const u = m.SearchIdUser(Id.value);
+//     u[0].setUserName = UserName.value;
+//     u[0].setUserWeight = UserWeight.value;
+//     console.log(u);
+// }
 
-btnUpdate.onclick = () => {
-    Id = document.querySelector('#id');
-    const u = m.SearchIdUser(Id.value);
-    u[0].setUserName = UserName.value;
-    u[0].setUserWeight = UserWeight.value;
-    console.log(u);
-}
 
-//on delete click
-btnDelete.onclick = () => {
-    Id = document.querySelector('#idDelete');
+// //on delete click
+// btnDelete.onclick = () => {
+//     Id = document.querySelector('#idDelete');
 
-}
+
+//     btnDelete.onclick = (id) => {
+//         for (let i = 0; i < usersList.users.length; i++) {
+//             console.log("id delete is working");
+//             if (user.id === parseInt(id)) {
+//                 delete usersList[i];
+//             }
+//         }
+//         console.log("deleted succesfully!")
+//         console.log(usersList.users)
+//     }
+//}
 
 showUserById.onclick = () => {
     id = idShow.value;
@@ -201,3 +269,19 @@ showUserById.onclick = () => {
         }
     })
 }
+
+// searchBtn.onclick = () => {
+//     // search();
+//     if (idSearch.checked)
+//         s.printUsers(s.Search(parseInt(idSearch.value)));
+//     if (firstNameSearch.checked)
+//         s.printUsers(s.Search(firstNameSearch.value));
+//     if (lastNameSearch.checked)
+//         s.printUsers(s.Search(lastNameSearch));
+//     if (citySearch.checked)
+//         s.printUsers(s.Search(citySearch.value));
+//     if (streetSearch.checked)
+//         s.printUsers(s.Search(streetSearch));
+//     if (numberSearch.checked)
+//         s.printUsers(s.Search(numberSearch.value));
+// }
