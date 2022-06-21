@@ -109,6 +109,35 @@ class Manager {
         return usersList.push(user);
     }
 
+    search(val){
+        search = document.querySelector("#search");
+        searchBtn = document.querySelector("#searchBtn");
+        usersList.users.forEach(user => {
+            console.log(user);
+            if (user.firstName === val) {
+                newUser = new User(user.firstName, user.lastName);
+                newUser.ShowUser(user);
+            }
+            if (user.lastName === val) {
+                newUser = new User(user.firstName, user.lastName);
+                newUser.ShowUser(user);
+            }
+            if (user.email === val) {
+                newUser = new User(user.firstName, user.lastName,user.email);
+                newUser.ShowUser(user);
+            }
+            if (user.phone === val) {
+                newUser = new User(user.firstName, user.lastName,user.phone);
+                newUser.ShowUser(user);
+            }
+            if (user.address.city === val) {
+                newUser = new User(user.firstName, user.lastName,user.address);
+                newUser.ShowUser(user);
+            }
+            
+        })
+    }
+
  
 }
 
@@ -186,3 +215,4 @@ showUserById.onclick = () => {
         }
     })
 }
+
