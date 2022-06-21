@@ -110,8 +110,7 @@ class Manager {
     }
 
     search(val){
-        search = document.querySelector("#search");
-        searchBtn = document.querySelector("#searchBtn");
+        const search = document.querySelector("#search");
         usersList.users.forEach(user => {
             console.log(user);
             if (user.firstName === val) {
@@ -153,6 +152,8 @@ const UserWeight = document.querySelector('#UserWeight');
 const showUserById = document.querySelector('#showUserById');
 const idShow = document.querySelector('#idShow');
 const showAll = document.querySelector('#showAllUsers')
+const searchBtn = document.querySelector("#searchBtn");
+
 
 //keeps the data in a global variable
 const usersList = {
