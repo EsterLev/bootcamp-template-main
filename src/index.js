@@ -134,6 +134,10 @@ class Manager {
                 newUser = new User(user.firstName, user.lastName,user.address);
                 newUser.ShowUser(user);
             }
+            if (user.address.street === val) {
+                newUser = new User(user.firstName, user.lastName,user.address);
+                newUser.ShowUser(user);
+            }
             
         })
     }
@@ -216,3 +220,6 @@ showUserById.onclick = () => {
     })
 }
 
+searchBtn.onclick =()=>{
+    search();
+}
