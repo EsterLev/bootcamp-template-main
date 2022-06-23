@@ -71,19 +71,19 @@ class User {
         return this.#number;
     }
 
-    set setHeight(height){
+    set setHeight(height) {
         this.#height = height;
     }
 
-    get getHeight(){
+    get getHeight() {
         return this.#height;
     }
 
-    set setWeight(weight){
+    set setWeight(weight) {
         this.#weight = weight;
     }
 
-    get getWeight(){
+    get getWeight() {
         return this.#weight;
     }
 
@@ -182,6 +182,7 @@ class Manager {
 
     constructor() {
         this.#usersList = new Array();
+        this.#filterUsers =usersList.users;
     };
     set setusersList(usersList) {
         this.#usersList = usersList;
@@ -201,15 +202,15 @@ class Manager {
     }
     u = false;
     ShowFilterUsers(user) {
-        if(this.#filterUsers!==undefined){
+        if (this.#filterUsers.length !== 0) {
             this.#filterUsers.foreach(us => {
-                if(us.id === user.id)
+                if (us.id === user.id)
                     u = true;
-           });
+            });
             if (u === false)
                 this.#filterUsers.push(user);
         }
-        else{
+        else {
             this.#filterUsers.push(user);
         }
     }
@@ -242,45 +243,46 @@ class Manager {
         container.innerHTML += table;
     }
 
-    Search = (val)=> {
-        //search = document.querySelector("#search");
-        usersList.users.forEach(user => {
-            if (user.firstName === val) {
-                console.log(user);
-                //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                this.ShowFilterUsers(user);
+    Search = (val) => {
+        if (this.#filterUsers.length !== 0) {
+            this.#filterUsers.forEach(user => {
+                if (user.firstName === val) {
+                    console.log(user);
+                    //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.lastName === val) {
+                    //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.email === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.phone === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.address.city === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.address.street === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.address.number === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
+                if (user.address === val) {
+                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                    this.ShowFilterUsers(user);
+                }
             }
-            if (user.lastName === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.email === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.phone === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.address.city === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.address.street === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.address.number === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-            }
-            if (user.address === val) {
-                newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                newUser.ShowFilterUsers(user);
-                newUser.printUsersFilter();
-            }
+            )
         }
-        )
+        this.printUsersFilter();
     }
 }
 
@@ -370,7 +372,7 @@ searchBtn.onclick = () => {
     if (id.checked)
         m.Search(parseInt(idSearch.value));
     if (firstName.checked)
-         m.Search(firstNameSearch.value);
+        m.Search(firstNameSearch.value);
     if (lastName.checked)
         m.Search(lastNameSearch.value);
     if (address.checked) {
