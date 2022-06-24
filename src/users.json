@@ -1,6 +1,4 @@
 {
-    "manager": { "id": 212, "first-name": "moshe" ,"last-name":"moshayov","email":"manager@gmail.com","password":"123"},
-    
     "users": [
         {
             "id":1,
