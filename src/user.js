@@ -1,8 +1,5 @@
 // const showUser = document.querySelector('.ShowUser');
 class User {
-
-    printUser = document.querySelector('.ShowUser');
-
     #firstName;
     #lastName;
     #city;
@@ -105,7 +102,7 @@ class User {
         this.#id = ++this.Id;
     };
 
-    ShowUser = (id) => {
+    ShowUser(id){
         user = usersList.users.forEach(u=>u.id===id);
         if (user != null) {
             const div = document.createElement('div');
@@ -143,6 +140,9 @@ class User {
             div3.append(h);
             div2.append(div3);
             const div4 = document.createElement('div');
+            a = document.createElement('a');
+            a.innerHTML = 'to manage a diary';
+            a.href="manageDairy.html";
             div.append(div2);
             div.append(div4);
             this.printUser.append(div);
@@ -150,9 +150,83 @@ class User {
     }
 }
 
+printUser = document.querySelector('.ShowUser');
+
 const usersList = {
     manager: {},
     users: {},
 };
 
-//ShowUser();
+//get the data from the json file
+const getusersList = () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", './users.json');
+    xhr.send();
+    xhr.onload = function () {
+        if (xhr.status != 200) {
+            alert(`Error ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            usersList.users = JSON.parse(xhr.responseText).users;
+            usersList.manager = JSON.parse(xhr.responseText).manager;
+            console.log(usersList.manager);
+            let table = '';
+            usersList.users.forEach(user => {
+                if (user != null) {
+                    const div = document.createElement('div');
+                    div.classList.add('user');
+                    div.classList.add('divUser');
+                    const div2 = document.createElement('div');
+                    const div3 = document.createElement('div');
+                    const span = document.createElement('span');
+                    const address = document.createElement('span');
+                    const city = document.createElement('span');
+                    const street = document.createElement('span');
+                    const number = document.createElement('span');
+                    const span2 = document.createElement('span');
+                    const phonespan = document.createElement('span');
+                    const emailspan = document.createElement('span');
+                    span.innerHTML = user.firstName + ' ' + user.lastName;
+                    city.innerHTML = user.address.city;
+                    street.innerHTML = user.address.street;
+                    number.innerHTML = user.address.number;
+                    address.append(city);
+                    address.append(street);
+                    address.append(number);
+                    phonespan.innerHTML = user.phone;
+                    emailspan.innerHTML = user.email;
+                    div3.append(span);
+                    div3.append(span2);
+                    div3.append(address);
+                    div3.append(phonespan);
+                    div3.append(emailspan);
+                    const h5 = document.createElement('h5');
+                    h5.innerHTML = 'id:' + user.id;
+                    div3.append(h5);
+                    const h = document.createElement('h6');
+                    h.innerHTML = 'weight' + user.weight[user.weight.length - 1];
+                    div3.append(h);
+                    div2.append(div3);
+                    const div4 = document.createElement('div');
+                    a = document.createElement('a');
+                    a.innerHTML = 'to manage a diary';
+                    a.href="manageDairy.html";
+                    div.append(a);
+                    div.append(div2);
+                    div.append(div4);
+                    printUser.append(div);
+            //     table += `
+            //  <tr>
+            //      <th>${user.firstName + ' ' + user.lastName}</th>
+            //      <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+            //  </tr>`
+          //  user.ShowUser(user.id);
+            }})
+            // const container = document.querySelector('.ShowUser');
+            // container.innerHTML += table;
+        }
+    }
+};
+
+getusersList();
+
+
