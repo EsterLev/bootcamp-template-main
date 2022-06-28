@@ -12,7 +12,8 @@
             "height":"1.70",
             "weight":[
                 60,58,56
-            ]
+            ],
+            "managerDaily":[]
         },
         {
             "id":2,
@@ -24,7 +25,8 @@
             "height":"1.62",
             "weight":[
                 60,58,56
-            ]
+            ],
+            "managerDaily":[]
         }
     ]
 }
