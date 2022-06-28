@@ -1,5 +1,6 @@
 const SearchFoods = document.querySelector('#SearchFoods');
 container = document.querySelector('.usersTable');
+
 showDetails = (product) => {
     container.innerHTML = '';
     let table = '';
