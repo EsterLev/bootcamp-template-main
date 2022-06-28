@@ -33,7 +33,12 @@ loginBtn.onclick = () => {
     else (usersList.users.forEach(u => {
         if (u.id === parseInt(id)) {
             //צריך לשרשר פה את ה ID
-            location.href = `user.html`
+            //   location.href = "../user.html?id=${user.id}"+${user.firstName + ' ' + user.lastName}
+            table += `
+        <tr>
+            <th><a href="../user.html?id=${user.id}">${user.firstName + ' ' + user.lastName}</a></th>
+            <th style="color:${color}" >${bmi}</th>
+        </tr>`
         }
     }))
 }
