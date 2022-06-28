@@ -102,8 +102,8 @@ class User {
         this.#id = ++this.Id;
     };
 
-    ShowUser(id){
-        user = usersList.users.forEach(u=>u.id===id);
+    ShowUser(id) {
+        user = usersList.users.forEach(u => u.id === id);
         if (user != null) {
             const div = document.createElement('div');
             div.classList.add('user');
@@ -142,7 +142,7 @@ class User {
             const div4 = document.createElement('div');
             a = document.createElement('a');
             a.innerHTML = 'to manage a diary';
-            a.href="manageDairy.html";
+            a.href = "manageDairy.html";
             div.append(div2);
             div.append(div4);
             this.printUser.append(div);
@@ -157,6 +157,9 @@ const usersList = {
     users: {},
 };
 
+const searchURL = new URLSearchParams(location.search);
+const userURL = parseInt(searchURL.get('id'));
+
 //get the data from the json file
 const getusersList = () => {
     const xhr = new XMLHttpRequest();
@@ -168,10 +171,9 @@ const getusersList = () => {
         } else {
             usersList.users = JSON.parse(xhr.responseText).users;
             usersList.manager = JSON.parse(xhr.responseText).manager;
-            console.log(usersList.manager);
             let table = '';
             usersList.users.forEach(user => {
-                if (user != null) {
+                if (user.id != userURL) {
                     const div = document.createElement('div');
                     div.classList.add('user');
                     div.classList.add('divUser');
@@ -209,20 +211,13 @@ const getusersList = () => {
                     const div4 = document.createElement('div');
                     a = document.createElement('a');
                     a.innerHTML = 'to manage a diary';
-                    a.href="manageDairy.html";
+                    a.href = "manageDairy.html";
                     div.append(a);
                     div.append(div2);
                     div.append(div4);
                     printUser.append(div);
-            //     table += `
-            //  <tr>
-            //      <th>${user.firstName + ' ' + user.lastName}</th>
-            //      <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
-            //  </tr>`
-          //  user.ShowUser(user.id);
-            }})
-            // const container = document.querySelector('.ShowUser');
-            // container.innerHTML += table;
+                }
+            })
         }
     }
 };
