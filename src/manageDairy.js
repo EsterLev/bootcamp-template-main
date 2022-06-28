@@ -21,7 +21,4 @@ for(let i=0;i<numOfFoods.value;i++)
 }
 }
 
-//There is an option to add a day summary, for adding a summary of a day.
-addSummary(){
-  
-}
+
