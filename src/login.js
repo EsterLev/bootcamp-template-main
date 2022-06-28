@@ -26,19 +26,21 @@ getusersList();
 
 loginBtn.onclick = () => {
     id = loginInput.value;
+    if (id === undefined)
+        alert("you not enter anything");
+    let flag = 0;
     if (usersList.manager.id === parseInt(id)) {
-        location.href = `./manager.html`
+        flag = 1;
+        location.href = `./manager.html`;
     }
-
     else (usersList.users.forEach(u => {
         if (u.id === parseInt(id)) {
             //צריך לשרשר פה את ה ID
-            //   location.href = "../user.html?id=${user.id}"+${user.firstName + ' ' + user.lastName}
-            table += `
-        <tr>
-            <th><a href="../user.html?id=${user.id}">${user.firstName + ' ' + user.lastName}</a></th>
-            <th style="color:${color}" >${bmi}</th>
-        </tr>`
+            flag = 1;
+            window.location.href = './user.html?id=' + `${u.id}`;
+        }
+        if (flag === 0) {
+            alert("not found try again");
         }
     }))
 }
