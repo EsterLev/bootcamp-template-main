@@ -6,3 +6,8 @@ btnEdit.onclick=(e)=>{
         console.log(element);
    });
 }
+
+//There is an option to add a day summary, for adding a summary of a day.
+addSummary(){
+  
+}
