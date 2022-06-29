@@ -10,11 +10,28 @@
     <div id="add">
         <button type="submit" id="btnshow">To show the daily</button>
         <div id="show"></div>
-        <div class="addFoods">
-            <h2>To add food:</h2>
-            <button type="submit" id="btnEdit">to add</button>
-            <button type="submit" id="btnDate">Edit date</button>
-            <button type="submit" id="btnSave">save</button>
+        <div class="addFoods">   
+        <h2>Modal Example</h2>
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="daily-meals">&times;</span>
+                <h2>add day of eating</h2>
+                        <!-- <span>date:</span>
+                <input type="date" class="dateOfMeal"> -->
+                <button type="submit" id="btnAdd">to add food</button>
+                <button type="submit" id="btnDate">Edit date</button>
+                <button type="submit" id="btnSave">save</button>
+        </div>
+        </div>
+            </div>
         </div>
     </div>
     <script src="./manageDairy.js"></script>
