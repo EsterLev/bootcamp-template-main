@@ -1,152 +1,42 @@
-// const showUser = document.querySelector('.ShowUser');
-class User {
+const createUser = (u) => {
+    userContainer.innerHTML = "";
+    FirstName = document.createElement('h4');
+    LastName = document.createElement('h4');
+    Address = document.createElement('h4');
+    Phone = document.createElement('h4');
+    Email = document.createElement('h4');
+    Height = document.createElement('h4');
+    Weight = document.createElement('div');
+    WeightStart = document.createElement('h4');
+    StartBmi = document.createElement('h4');
+    CurrentBmi = document.createElement('h4');
+    WeightMeetings = document.createElement('h4');
+    FirstName.innerHTML = u.firstName;
+    LastName.innerHTML = u.lastName;
+    Address.innerHTML = u.address.street + " " + u.address.number + " " + u.address.city;
+    Phone.innerHTML = u.phone;
+    Email.innerHTML = u.email;
+    Height.innerHTML = u.height;
+    WeightStart.innerHTML = "Start Weight: " + u.weight.start;
+    StartBmi.innerHTML = "Start BMI: " + u.weight.start / (u.height * u.height);
+    CurrentBmi.innerHTML = "CurrentBmi: " + u.weight.meetings[u.weight.meetings.length - 1].weight / (u.height * u.height);
+    WeightMeetings.innerHTML = "Meetings: ";
+    u.weight.meetings.forEach(m => {
+        let table = '';
+        table += `
+        <tr>
+            <th>${m.date}</a></th>
+            <th>${m.weight}</th>
+        </tr>`
+        containerMeetings = document.querySelector('.userTable');
+        containerMeetings.innerHTML += table;
+    })
+    userContainer.style.display = "flex";
+    userContainer.style.flexDirection = "column";
+    userContainer.style.padding = "10px";
+    userContainer.style.alignItems = "start";
+    userContainer.append(FirstName, LastName, Address, Phone, Email, Height, WeightStart, StartBmi, CurrentBmi, WeightMeetings);
 
-    printUser = document.querySelector('.ShowUser');
-
-    #firstName;
-    #lastName;
-    #city;
-    #street;
-    #number;
-    #phone;
-    #email;
-    #height;
-    #weight;
-    #id;
-    static Id = 0;
-    //function
-    //GET and SET
-    //for the private variables
-    set setFirstName(firstName) {
-        this.#firstName = firstName;
-    }
-
-    get getFirstName() {
-        return this.#firstName;
-    }
-
-    set setLastName(LastName) {
-        this.#lastName = LastName;
-    }
-    get getLastName() {
-        return this.#lastName;
-    }
-
-    get getPhone() {
-        return this.#phone;
-    }
-
-    set setPhone(phone) {
-        this.#phone = phone;
-    }
-    get getPhone() {
-        return this.#phone;
-    }
-
-    set setEmail(mail) {
-        this.#email = mail;
-    }
-    get getEmail() {
-        return this.#email;
-    }
-
-    set setCity(city) {
-        this.#city = city;
-    }
-    get getCity() {
-        return this.#city;
-    }
-
-    set setStreet(street) {
-        this.#street = street;
-    }
-    get getStreet() {
-        return this.#street;
-    }
-
-    set setNumber(number) {
-        this.#number = number;
-    }
-    get getNumber() {
-        return this.#number;
-    }
-
-    set setHeight(height) {
-        this.#height = height;
-    }
-
-    get getHeight() {
-        return this.#height;
-    }
-
-    set setWeight(weight) {
-        this.#weight = weight;
-    }
-
-    get getWeight() {
-        return this.#weight;
-    }
-
-    get getId() {
-        return this.#id;
-    }
-
-
-    constructor(firstName, lastName, city, street, number, phone, email, height, weight) {
-        this.#firstName = firstName;
-        this.#lastName = lastName;
-        this.#city = city;
-        this.#street = street;
-        this.#number = number;
-        this.#phone = phone;
-        this.#email = email;
-        this.#height = height;
-        this.weight = weight;
-        this.#id = ++this.Id;
-    };
-
-    ShowUser = (user) => {
-        if (user != null) {
-            const div = document.createElement('div');
-            div.classList.add('user');
-            div.classList.add('divUser');
-            const div2 = document.createElement('div');
-            const div3 = document.createElement('div');
-            const span = document.createElement('span');
-            const address = document.createElement('span');
-            const city = document.createElement('span');
-            const street = document.createElement('span');
-            const number = document.createElement('span');
-            const span2 = document.createElement('span');
-            const phonespan = document.createElement('span');
-            const emailspan = document.createElement('span');
-            span.innerHTML = user.firstName + ' ' + user.lastName;
-            city.innerHTML = user.address.city;
-            street.innerHTML = user.address.street;
-            number.innerHTML = user.address.number;
-            address.append(city);
-            address.append(street);
-            address.append(number);
-            phonespan.innerHTML = user.phone;
-            emailspan.innerHTML = user.email;
-            div3.append(span);
-            div3.append(span2);
-            div3.append(address);
-            div3.append(phonespan);
-            div3.append(emailspan);
-            const h5 = document.createElement('h5');
-            h5.innerHTML = 'id:' + user.id;
-            div3.append(h5);
-            const h = document.createElement('h6');
-            h.innerHTML = 'weight' + user.weight[user.weight.length - 1];
-            div3.append(h);
-            div2.append(div3);
-            const div4 = document.createElement('div');
-            div.append(div2);
-            div.append(div4);
-            this.printUser.append(div);
-        }
-    }
 }
 
 //get the data from the json file
@@ -158,134 +48,108 @@ const getusersList = () => {
         if (xhr.status != 200) {
             alert(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
-            console.log(usersList.manager);
-            let table = '';
-            usersList.users.forEach(user => {
-                table += `
-             <tr>
-                 <th>${user.firstName + ' ' + user.lastName}</th>
-                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
-             </tr>`
+            users = JSON.parse(Request.responseText).users;
+            users.forEach(user => {
+                if (user.id === userURL) {
+                    createUser(user);
+                }
             })
-            const container = document.querySelector('.ShowUser');
-            container.innerHTML += table;
         }
     }
 };
 
-class Manager {
+let filterUsers;
+// let usersList;
 
-    //ShowProducts = document.querySelector('.ShowProducts');
-    #filterUsers;
-    #usersList;
-
-    constructor() {
-        this.#usersList = new Array();
-        this.#filterUsers =usersList.users;
-    };
-    set setusersList(usersList) {
-        this.#usersList = usersList;
+//pushing to the products id
+AddUser = (user) => {
+    return usersList.push(user);
+}
+u = false;
+ShowFilterUsers = (user) => {
+    if (this.filterUsers.length !== 0) {
+        this.filterUsers.foreach(us => {
+            if (us.id === user.id)
+                u = true;
+        });
+        if (u === false)
+            this.filterUsers.push(user);
     }
-    get getusersList() {
-        return this.#usersList;
-    }
-
-    // SearchUserById(id){
-    //     usersList.users = d;
-    //     d = d.users.filter(fn => fn.id);
-    //     showUserById.innerHTML = usersList.users.getId;
-    // }
-    //pushing to the products id
-    AddUser(user) {
-        return usersList.push(user);
-    }
-    u = false;
-    ShowFilterUsers(user) {
-        if (this.#filterUsers.length !== 0) {
-            this.#filterUsers.foreach(us => {
-                if (us.id === user.id)
-                    u = true;
-            });
-            if (u === false)
-                this.#filterUsers.push(user);
-        }
-        else {
-            this.#filterUsers.push(user);
-        }
-    }
-
-    printUsersFilter() {
-        let table = '';
-        this.#filterUsers.forEach(user => {
-            console.log(user);
-            table += `
-         <tr>
-             <th>${user.firstName + ' ' + user.lastName}</th>
-             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
-         </tr>`
-        })
-        const container = document.querySelector('.ShowUser');
-        container.innerHTML += table;
-    }
-
-    printUsers() {
-        let table = '';
-        usersList.users.forEach(user => {
-            console.log(user);
-            table += `
-         <tr>
-             <th>${user.firstName + ' ' + user.lastName}</th>
-             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
-         </tr>`
-        })
-        const container = document.querySelector('.ShowUser');
-        container.innerHTML += table;
-    }
-
-    Search = (val) => {
-        if (this.#filterUsers.length !== 0) {
-            this.#filterUsers.forEach(user => {
-                if (user.firstName === val) {
-                    console.log(user);
-                    //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.lastName === val) {
-                    //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.email === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.phone === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.address.city === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.address.street === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.address.number === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-                if (user.address === val) {
-                    // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
-                    this.ShowFilterUsers(user);
-                }
-            }
-            )
-        }
-        this.printUsersFilter();
+    else {
+        this.filterUsers.push(user);
     }
 }
+
+printUsersFilter = () => {
+    let table = '';
+    this.filterUsers.forEach(user => {
+        console.log(user);
+        table += `
+         <tr>
+             <th>${user.firstName + ' ' + user.lastName}</th>
+             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+         </tr>`
+    })
+    const container = document.querySelector('.ShowUser');
+    container.innerHTML += table;
+}
+
+printUsers = () => {
+    let table = '';
+    usersList.users.forEach(user => {
+        console.log(user);
+        table += `
+         <tr>
+             <th>${user.firstName + ' ' + user.lastName}</th>
+             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+         </tr>`
+    })
+    const container = document.querySelector('.ShowUser');
+    container.innerHTML += table;
+}
+
+Search = (val) => {
+    if (this.filterUsers.length !== 0) {
+        this.filterUsers.forEach(user => {
+            if (user.firstName === val) {
+                console.log(user);
+                //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.lastName === val) {
+                //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.email === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.phone === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.city === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.street === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.number === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+        }
+        )
+    }
+    this.printUsersFilter();
+}
+// }
 
 const btnAdd = document.querySelector('#btnAdd');
 const btnDelete = document.querySelector('#btnDelete');
@@ -311,7 +175,7 @@ const numberSearch = document.querySelector('#numberSearch');
 
 //keeps the data in a global variable
 const usersList = {
-    manager:{},
+    manager: {},
     users: {},
 };
 
@@ -331,13 +195,22 @@ getusersList();
 
 // }
 
-// btnUpdate.onclick = () => {
-//     Id = document.querySelector('#id');
-//     const u = m.SearchIdUser(Id.value);
-//     u[0].setUserName = UserName.value;
-//     u[0].setUserWeight = UserWeight.value;
-//     console.log(u);
-// }
+btnUpdate.onclick = (e) => {
+    e.preventDefault();
+    FirstName.setAttribute('contenteditable', 'true');
+    LastName.setAttribute('contenteditable', 'true');
+    Address.setAttribute('contenteditable', 'true');
+    Phone.setAttribute('contenteditable', 'true');
+    Email.setAttribute('contenteditable', 'true');
+    Height.setAttribute('contenteditable', 'true');
+    FirstName.style.color = 'gray';
+    LastName.style.color = 'gray';
+    Address.style.color = 'gray';
+    Phone.style.color = 'gray';
+    Email.style.color = 'gray';
+    Height.style.color = 'gray';
+
+}
 
 
 // //on delete click

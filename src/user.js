@@ -1,13 +1,17 @@
-let firstName;
-let lastName;
-let city;
-let street;
-let number;
-let phone;
-let email;
-let height;
-let weight;
 let id;
+
+let FirstName = "";
+let LastName = "";
+let Address = "";
+let Phone = "";
+let Email = "";
+let Height = "";
+let Weight = "";
+// let WeightStart = "";
+// let StartBmi = "";
+// let CurrentBmi = "";
+// let WeightMeetings = "";
+// let containerMeetings = "";
 
 printUser = document.querySelector('.ShowUser');
 
@@ -83,4 +87,21 @@ const getusersList = () => {
 
 getusersList();
 
+
+// const Edit = document.querySelector('#Edit');
+// Edit.onclick = (e) => {
+//     e.preventDefault();
+//     FirstName.setAttribute('contenteditable', 'true');
+//     LastName.setAttribute('contenteditable', 'true');
+//     Address.setAttribute('contenteditable', 'true');
+//     Phone.setAttribute('contenteditable', 'true');
+//     Email.setAttribute('contenteditable', 'true');
+//     Height.setAttribute('contenteditable', 'true');
+//     FirstName.style.color = 'gray';
+//     LastName.style.color = 'gray';
+//     Address.style.color = 'gray';
+//     Phone.style.color = 'gray';
+//     Email.style.color = 'gray';
+//     Height.style.color = 'gray';
+// }
 
