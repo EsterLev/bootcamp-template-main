@@ -31,7 +31,7 @@ loginBtn.onclick = () => {
     let flag = 0;
     if (usersList.manager.id === parseInt(id)) {
         flag = 1;
-        location.href = `./manager.html`;
+        window.location.href = './manager.html';
     }
     else (usersList.users.forEach(u => {
         if (u.id === parseInt(id)) {

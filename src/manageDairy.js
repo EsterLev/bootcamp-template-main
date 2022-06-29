@@ -7,7 +7,6 @@ const searchURL = new URLSearchParams(location.search);
 const userURL = parseInt(searchURL.get('id'));
 const btnshow = document.getElementById('btnshow');
 const btnDate = document.getElementById('btnDate');
-const div = document.createElement('div');
 
 const usersList = {
     manager: {},
@@ -15,18 +14,14 @@ const usersList = {
 };
 
 const getJson = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", './users.json');
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
-        }
-    }
-}
+    fetch('./users.json')
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            usersList.users = data.users;
+            usersList.manager = data.manager;
+        })
+};
 
 getJson();
 
@@ -152,22 +147,25 @@ btnDate.onclick = () => {
     div.append(inputDate);
     addFoods.append(div);
     daily.push(Date.now);
-    inputDate.onchange=()=>{
-        daily[daily.length-1] = inputDate.value;
+    inputDate.onchange = () => {
+        daily[daily.length - 1] = inputDate.value;
     }
 }
 
 btnSave.onclick = () => {
     usersList.users.forEach(user => {
         if (user.id === userURL) {
-            user.daily.forEach(fOrD=>{
+            daily.forEach(fOrD => {
                 console.log(fOrD);
-                if(fOrD===Date.now || fOrD!==typeof(String))
-                {
-                    daily.push(Date.now);
+                if (fOrD === Date.now || parseInt(fOrD[0])!==NaN) {
+                    console.log(typeof (fOrD));
+                    user.managerDaily[0].date = fOrD;
                 }
             })
-            user.managerDaily = daily;
+            daily.forEach(f => {
+                if (!parseInt(f[0]))
+                    user.managerDaily[0].p.push(f);
+            })
             console.log(user.managerDaily);
         }
     });
