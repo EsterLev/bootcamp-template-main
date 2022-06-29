@@ -176,19 +176,19 @@ btnAddDinner.onclick = () => {
 
 //   }
 //fill the inputs for each meal
-inputDescription = (e) => {
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    inputDesc.onchange = () => {
-        daily.push(inputDesc.value);
-    }
-    // inputDate.onchange=()=>{
-    //     daily.push(inputDate.value);
-    // }
-    console.log(daily);
-    div.append(inputDesc);
-}
+// inputDescription = (e) => {
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     inputDesc.onchange = () => {
+//         daily.push(inputDesc.value);
+//     }
+//     // inputDate.onchange=()=>{
+//     //     daily.push(inputDate.value);
+//     // }
+//     console.log(daily);
+//     div.append(inputDesc);
+// }
 
 
 //update date
