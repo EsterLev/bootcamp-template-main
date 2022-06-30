@@ -14,7 +14,7 @@
                 60,58,56
             ],
             "managerDaily":[
-               {"p":["לבן","לחם"],"date":"28-06-2022"}
+               {"p":[{"breakfast":["לבן","לחם"]}, {"lunch":[]}, {"dinner":[]}],"date":"28-06-2022"}
             ]
         },
         {
@@ -28,7 +28,9 @@
             "weight":[
                 60,58,56
             ],
-            "managerDaily":[]
+            "managerDaily":[
+            {"p":[{"breakfast":[]}, {"lunch":[]}, {"dinner":[]}],"date":""}
+            ]
         }
     ]
 }
