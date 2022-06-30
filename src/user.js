@@ -27,7 +27,6 @@ theCurrentUser = () => {
     usersList.users.forEach(u => {
         if (u.id === userURL) {
             currentUser = u;
-            console.log(currentUser);
         }
     })
 }
@@ -44,8 +43,7 @@ const getusersList = () => {
             usersList.manager = JSON.parse(xhr.responseText).manager;
             let table = '';
             usersList.users.forEach(user => {
-                let u = user.user;
-                if (u.id === userURL) {
+                if (user.id === userURL) {
                     const div = document.createElement('div');
                     div.classList.add('user');
                     div.classList.add('divUser');
@@ -59,31 +57,31 @@ const getusersList = () => {
                     const span2 = document.createElement('span');
                     const phonespan = document.createElement('span');
                     const emailspan = document.createElement('span');
-                    span.innerHTML = u.firstName + ' ' + u.lastName + ' ';
-                    city.innerHTML = u.address.city + ' ';
-                    street.innerHTML = u.address.street + ' ';
-                    number.innerHTML = u.address.number + ' ';
+                    span.innerHTML = user.firstName + ' ' + user.lastName + ' ';
+                    city.innerHTML = user.address.city + ' ';
+                    street.innerHTML = user.address.street + ' ';
+                    number.innerHTML = user.address.number + ' ';
                     address.append(city);
                     address.append(street);
                     address.append(number);
-                    phonespan.innerHTML = 'phone: ' + u.phone + ' ';
-                    emailspan.innerHTML = 'mail: ' + u.email + ' ';
+                    phonespan.innerHTML = 'phone: ' + user.phone + ' ';
+                    emailspan.innerHTML = 'mail: ' + user.email + ' ';
                     div3.append(span);
                     div3.append(span2);
                     div3.append(address);
                     div3.append(phonespan);
                     div3.append(emailspan);
                     const h5 = document.createElement('h5');
-                    h5.innerHTML = 'id:' + u.id + ' ';
+                    h5.innerHTML = 'id:' + user.id + ' ';
                     div3.append(h5);
                     const h = document.createElement('h6');
-                    h.innerHTML = 'weight' + u.weight[u.weight.length - 1] + ' ';
+                    h.innerHTML = 'weight' + user.weight[user.weight.length - 1] + ' ';
                     div3.append(h);
                     div2.append(div3);
                     const div4 = document.createElement('div');
                     a = document.createElement('a');
                     a.innerHTML = 'to manage a diary';
-                    a.href = 'manageDairy.html?id=' + `${u.id}`;
+                    a.href = 'manageDairy.html?id=' + `${user.id}`;
                     div.append(a);
                     div.append(div2);
                     div.append(div4);
@@ -115,7 +113,7 @@ Edit.onclick = (e) => {
         <th>phone: <input type="text" id="phone" value=${currentUser.phone}></input></th>
         <th>email: <input type="text" id="mail" value=${currentUser.email}></input></th>
         <th>height: <input type="text" id="height" value=${currentUser.height}></input></th>
-        <th>height: <input type="text" id="weight" value=${currentUser.weight}></input></th>
+        <th>weight: <input type="text" id="weight" value=${currentUser.weight[currentUser.weight.length - 1]}></input></th>
         <th><button type="submit" id="save" value="save changea">save changes</button></th>
     </tr>`
     ShowEdit.innerHTML += table;
@@ -141,32 +139,30 @@ Edit.onclick = (e) => {
         currentUser.height = height.value;
         currentUser.weight = weight.value;
         console.log(currentUser)
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        fetch(`http://localhost:3000/users/${userURL}`, {
+            method: `PATCH`,
+            // Sending only the fields that to be updated
+            body: JSON.stringify({
+                "firstName": currentUser.firstName,
+                "lastName": currentUser.lastName,
+                "address.city": currentUser.address.city,
+                "address.street": currentUser.address.street,
+                "address.number": currentUser.address.number,
+                "phone": currentUser.phone,
+                "email": currentUser.email,
+                "height": currentUser.height,
+                "weight": currentUser.weight
+            }),
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json"
             },
-            method: "PATCH",
-
-            // Sending only the fields that to be updated
-            body: JSON.stringify({
-                "firstName": currentUser.firstName,
-                "lastName":currentUser.lastName,
-                "address":{"city":currentUser.address.city,
-                "street":currentUser.address.street,
-                "number":currentUser.address.number},
-                "phone":currentUser.phone,
-                "email":currentUser.email,
-                "height":currentUser.height,
-                "weight":currentUser.weight
-            })
         })
-            .then(function (response) {
-                console.log(response);
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            });
+            .then(response => console.log(response));
+        //     return response.json();
+        // }
+        // .then(function (data) {
+        //     console.log(data);
+        // });
     }
 }

@@ -54,19 +54,18 @@ const getusersList = () => {
             usersList.manager = JSON.parse(xhr.responseText).manager;
             let table = '';
             usersList.users.forEach(user => {
-                console.log(user);
                 table += `
              <tr>
-                 <th>${user.user.firstName + ' ' + user.user.lastName}</th>
-                 <th>${user.user.weight[user.user.weight.length - 1] / Math.sqrt(user.user.height)}</th><br/>
-                 <th><button type="submit" id="moreDetails">more details</button></th>
+                 <th>${user.firstName + ' ' + user.lastName}</th>
+                 <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th><br/>
              </tr>`
-             const moreDetails = document.getElementById('moreDetails');
-             moreDetails.onclick=()=>{
-                 theCurrentUser(user.id);
-             }
+                //  <th><button type="submit" id="moreDetails">more details</button></th>
+                //  const moreDetails = document.getElementById('moreDetails');
+                //  moreDetails.onclick=()=>{
+                //      theCurrentUser(user.id);
+                //  }
             })
-           
+
             const container = document.querySelector('.ShowUser');
             container.innerHTML += table;
         }
@@ -100,6 +99,7 @@ AddUser = () => {
             <th><input type="text" id="phone" value="enter phone number"></input></th>
             <th><input type="text" id="mail" value="enter mail address"></input></th>
             <th><input type="text" id="height" value="enter height"></input></th>
+            <th><input type="text" id="weight" value="enter weight"></input></th>
             <th><button type="submit" id="save" value="save changea">save changes</button></th>
         </tr>`
     form.innerHTML += table;
@@ -112,39 +112,41 @@ AddUser = () => {
     const phone = document.getElementById('phone');
     const mail = document.getElementById('mail');
     const height = document.getElementById('height');
+    const weight = document.getElementById('weight');
 
     btnSave.onclick = () => {
         console.log(currentUser);
+        currentUser = new Object();
         currentUser.firstName = firstname.value;
         currentUser.lastName = lastname.value;
+        currentUser.address = new Object();
         currentUser.address.city = city.value;
         //currentUser.address.street = street.value;
         currentUser.address.number = number.value;
         currentUser.phone = phone.value;
         currentUser.mail = mail.value;
         currentUser.height = height.value;
-        console.log(currentUser)
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        currentUser.weight = new Array();
+        currentUser.weight.push(weight.value);
+        currentUser.id = usersList.users.length+1;
+        //console.log(currentUser)
+        fetch(`http://localhost:3000/users/`, {
+            method: `POST`,
+            body: JSON.stringify(currentUser),
             headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-
-            // Sending only the fields that to be updated
-            body: JSON.stringify({
-                user: currentUser
-            })
+                "Content-type": "application/json; charset=UTF-8"
+            }
         })
-            .then(function (response) {
-                console.log(response);
-                return response.json();
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
             })
-            .then(function (data) {
-                console.log(data);
+            .catch((error) => {
+                console.error('Error:', error);
             });
     }
 }
+
 
 u = false;
 ShowFilterUsers = (user) => {
@@ -327,7 +329,7 @@ searchBtn.onclick = () => {
     }
 }
 
-btnAdd.onclick = ()=>{
+btnAdd.onclick = () => {
     AddUser();
 }
 
