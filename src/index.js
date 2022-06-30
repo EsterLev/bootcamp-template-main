@@ -52,25 +52,98 @@ const getusersList = () => {
         } else {
             usersList.users = JSON.parse(xhr.responseText).users;
             usersList.manager = JSON.parse(xhr.responseText).manager;
-            console.log(usersList.manager);
             let table = '';
             usersList.users.forEach(user => {
+                console.log(user);
                 table += `
              <tr>
-                 <th>${user.firstName + ' ' + user.lastName}</th>
-                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+                 <th>${user.user.firstName + ' ' + user.user.lastName}</th>
+                 <th>${user.user.weight[user.user.weight.length - 1] / Math.sqrt(user.user.height)}</th><br/>
+                 <th><button type="submit" id="moreDetails">more details</button></th>
              </tr>`
+             const moreDetails = document.getElementById('moreDetails');
+             moreDetails.onclick=()=>{
+                 theCurrentUser(user.id);
+             }
             })
+           
             const container = document.querySelector('.ShowUser');
             container.innerHTML += table;
         }
     }
 };
 
+let currentUser = "";
+theCurrentUser = (id) => {
+    usersList.users.forEach(u => {
+        if (u.id === id) {
+            currentUser = u;
+            console.log(currentUser);
+        }
+    })
+}
+
 filterUsers = new Array();
+const form = document.getElementById('form');
 //pushing to the products id
-AddUser = (user) => {
-    return usersList.push(user);
+AddUser = () => {
+    form.innerHTML = '';
+    let table = '';
+    //e.preventDefault();
+    table += `
+        <tr>
+            <th><input type="text" id="first" value="enter first name"></input></th>
+            <th><input type="text" id="last" value="enter last name"></input></th>
+            <th><input type="text" id="city" value="enter city"></input></th>
+            <th><input type="text id="street" value="enter street"></input></th>
+            <th><input type="text" id="number" value="enter number"></input></th>
+            <th><input type="text" id="phone" value="enter phone number"></input></th>
+            <th><input type="text" id="mail" value="enter mail address"></input></th>
+            <th><input type="text" id="height" value="enter height"></input></th>
+            <th><button type="submit" id="save" value="save changea">save changes</button></th>
+        </tr>`
+    form.innerHTML += table;
+    const btnSave = document.getElementById('save');
+    const firstname = document.getElementById('first');
+    const lastname = document.getElementById('last');
+    const city = document.getElementById('city');
+    const street = document.getElementById('street');
+    const number = document.getElementById('number');
+    const phone = document.getElementById('phone');
+    const mail = document.getElementById('mail');
+    const height = document.getElementById('height');
+
+    btnSave.onclick = () => {
+        console.log(currentUser);
+        currentUser.firstName = firstname.value;
+        currentUser.lastName = lastname.value;
+        currentUser.address.city = city.value;
+        //currentUser.address.street = street.value;
+        currentUser.address.number = number.value;
+        currentUser.phone = phone.value;
+        currentUser.mail = mail.value;
+        currentUser.height = height.value;
+        console.log(currentUser)
+        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+
+            // Sending only the fields that to be updated
+            body: JSON.stringify({
+                user: currentUser
+            })
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+            });
+    }
 }
 
 u = false;
@@ -156,7 +229,7 @@ Search = (val) => {
         }
         )
     }
-    else{
+    else {
         usersList.users.forEach(user => {
             if (user.firstName === val) {
                 console.log(user);
@@ -252,6 +325,10 @@ searchBtn.onclick = () => {
         if (numberSearch.value)
             Search(numberSearch.value);
     }
+}
+
+btnAdd.onclick = ()=>{
+    AddUser();
 }
 
 
