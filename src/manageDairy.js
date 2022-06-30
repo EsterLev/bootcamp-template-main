@@ -35,17 +35,17 @@ showTheDaily = () => {
         if (user.id === userURL && user.managerDaily.length > 0)
             user.managerDaily.forEach(day => {
                 const div = document.createElement('div');
-                if (day.p) {
+                if (day!==null && day.length > 0) {
                     day.p.forEach(f => {
                         const desc = document.createElement('span');
                         desc.innerHTML = f + ' ';
                         div.append(desc);
                     })
+                    const date = document.createElement('span');
+                    date.innerHTML = day.date;
+                    div.append(date);
+                    show.append(div);
                 }
-                const date = document.createElement('span');
-                date.innerHTML = day.date;
-                div.append(date);
-                show.append(div);
             })
     });
 }
@@ -116,6 +116,9 @@ btnAddBreakfast.onclick = () => {
     const inputDesc = document.createElement('input');
     inputDesc.type = "text";
     inputDesc.id = "valueDesc";
+    div.append(desc);
+    div.append(inputDesc);
+    addFoods.append(div);
     inputDesc.onchange = () => {
         daily[0].push(inputDesc.value);
     }
@@ -123,7 +126,6 @@ btnAddBreakfast.onclick = () => {
     //     daily.push(inputDate.value);
     // }
     console.log(daily);
-    div.append(inputDesc);
 }
 
 btnAddLunch.onclick = () => {
@@ -208,21 +210,59 @@ btnDate.onclick = () => {
 }
 
 btnSave.onclick = () => {
-    usersList.users.forEach(user => {
-        if (user.id === userURL) {
-            daily[0].forEach(fOrD => {
-                user.managerDaily[0].p[0].breakfast.push(fOrD);
-            })
-            daily[1].forEach(fOrD => {
-                user.managerDaily[0].p[1].lunch.push(fOrD);
-            })
-            daily[2].forEach(fOrD => {
-                user.managerDaily[0].p[2].dinner.push(fOrD);
-            })
-            user.managerDaily[0].date = daily[3];
-        }
-        console.log(user);
-    });
+    //  usersList.users.forEach(user => {
+    // if (user.id === userURL) {
+    //     daily[0].forEach(fOrD => {
+    //         user.managerDaily[0].p[0].breakfast.push(fOrD);
+    //     })
+    //     daily[1].forEach(fOrD => {
+    //         user.managerDaily[0].p[1].lunch.push(fOrD);
+    //     })
+    //     daily[2].forEach(fOrD => {
+    //         user.managerDaily[0].p[2].dinner.push(fOrD);
+    //     })
+    //     user.managerDaily[0].date = daily[3];
+    // }
+    // console.log(user);
+    console.log(userURL);
+    fetch(`  http://localhost:3000/users/${userURL}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+
+        // Sending only the fields that to be updated
+        body: JSON.stringify({
+            managerDaily: daily
+        })
+    })
+        .then(function (response) {
+
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+    //     daily = [new Array(), new Array(), new Array(), String];
+    // });
 }
+
+// saveInJson = (obj) => {
+//     console.log(obj);
+//     arrDairy.push(obj);
+//     console.log(arrDairy);
+//     fetch(`http://localhost:3000/users/${userURL}`, {
+//         method: `PATCH`,
+//         body: JSON.stringify({
+//             "dairy": arrDairy,
+//         }),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8"
+//         }
+//     }).then(response => console.log(response));
+//     arrDairy = [];
+// }
 
 
