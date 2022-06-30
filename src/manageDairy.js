@@ -7,7 +7,8 @@ const searchURL = new URLSearchParams(location.search);
 const userURL = parseInt(searchURL.get('id'));
 const btnshow = document.getElementById('btnshow');
 const btnDate = document.getElementById('btnDate');
-// const div = document.createElement('div');
+const div = document.createElement('div');
+
 
 
 const usersList = {
