@@ -1,5 +1,7 @@
 const numOfFoods = document.getElementById('num');
-const btnAdd = document.getElementById('btnAdd');
+const btnAddBreakfast = document.getElementById('btnAddBreakfast');
+const btnAddLunch = document.getElementById('btnAddLunch');
+const btnAddDinner = document.getElementById('btnAddDinner');
 const addFoods = document.querySelector('.addFoods');
 const btnSave = document.getElementById('btnSave');
 const show = document.querySelector('#show');
@@ -53,6 +55,11 @@ btnshow.onclick = () => {
 }
 
 const daily = new Array();
+const breakfast = new Array();
+const lunch = new Array();
+const dinner = new Array();
+const date = Date.now;
+daily.push(breakfast, lunch, dinner, date);
 
 
 // tryAdd=()=> {
@@ -75,33 +82,80 @@ const daily = new Array();
 //     div.append(btnMeals)   
 // }
 
-btnAdd.onclick=()=>{
-// Get the modal
-var modal = document.getElementById("myModal");
+btnAddBreakfast.onclick = () => {
+    // // Get the modal
+    // var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    // // Get the button that opens the modal
+    // var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+    // // When the user clicks the button, open the modal 
+    // btn.onclick = function () {
+    //     modal.style.display = "block";
+    // }
+
+    // // When the user clicks on <span> (x), close the modal
+    // span.onclick = function () {
+    //     modal.style.display = "none";
+    // }
+
+    // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function (event) {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
+    const div = document.createElement('div');
+    const desc = document.createElement('span');
+    desc.innerHTML = "what you eat? give a description";
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.id = "valueDesc";
+    inputDesc.onchange = () => {
+        daily[0].push(inputDesc.value);
+    }
+    // inputDate.onchange=()=>{
+    //     daily.push(inputDate.value);
+    // }
+    console.log(daily);
+    div.append(inputDesc);
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+btnAddLunch.onclick = () => {
+    const div = document.createElement('div');
+    const desc = document.createElement('span');
+    desc.innerHTML = "what you eat? give a description";
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.id = "valueDesc";
+    div.append(desc);
+    div.append(inputDesc);
+    addFoods.append(div);
+    inputDesc.onchange = () => {
+        daily[1].push(inputDesc.value);
+    }
+    console.log(daily);
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+btnAddDinner.onclick = () => {
+    const div = document.createElement('div');
+    const desc = document.createElement('span');
+    desc.innerHTML = "what you eat? give a description";
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.id = "valueDesc";
+    div.append(desc);
+    div.append(inputDesc);
+    addFoods.append(div);
+    inputDesc.onchange = () => {
+        daily[2].push(inputDesc.value);
+    }
+    console.log(daily);
 }
-}
+
 //creating description per meals
 // btnMeals.onclick=()=>{
 //     //meals
@@ -111,28 +165,28 @@ window.onclick = function(event) {
 //     inputDescription(lunch)
 //     const dinner=document.createElement('span');
 //     inputDescription(dinner)
-        
+
 //     div.append(brekfest);
 //     div.append(lunch);
 //     div.append(dinner);
-        
+
 //     addFoods.append(div);  
 
 //   }
 //fill the inputs for each meal
-inputDescription=(e)=>{
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    inputDesc.onchange = () => {
-        daily.push(inputDesc.value);
-    }
-    // inputDate.onchange=()=>{
-    //     daily.push(inputDate.value);
-    // }
-    console.log(daily);
-    div.append(inputDesc);
-}
+// inputDescription = (e) => {
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     inputDesc.onchange = () => {
+//         daily.push(inputDesc.value);
+//     }
+//     // inputDate.onchange=()=>{
+//     //     daily.push(inputDate.value);
+//     // }
+//     console.log(daily);
+//     div.append(inputDesc);
+// }
 
 
 //update date
@@ -146,28 +200,26 @@ btnDate.onclick = () => {
     const inputDate = document.createElement('input');
     div.append(inputDate);
     addFoods.append(div);
-    daily.push(Date.now);
     inputDate.onchange = () => {
-        daily[daily.length - 1] = inputDate.value;
+        daily[3] = inputDate.value;
     }
 }
 
 btnSave.onclick = () => {
     usersList.users.forEach(user => {
         if (user.id === userURL) {
-            daily.forEach(fOrD => {
-                console.log(fOrD);
-                if (fOrD === Date.now || parseInt(fOrD[0])!==NaN) {
-                    console.log(typeof (fOrD));
-                    user.managerDaily[0].date = fOrD;
-                }
+            daily[0].forEach(fOrD => {
+                user.managerDaily[0].p[0].breakfast.push(fOrD);
             })
-            daily.forEach(f => {
-                if (!parseInt(f[0]))
-                    user.managerDaily[0].p.push(f);
+            daily[1].forEach(fOrD => {
+                user.managerDaily[0].p[1].lunch.push(fOrD);
             })
-            console.log(user.managerDaily);
+            daily[2].forEach(fOrD => {
+                user.managerDaily[0].p[2].dinner.push(fOrD);
+            })
+            user.managerDaily[0].date = daily[3];
         }
+        console.log(user);
     });
 }
 

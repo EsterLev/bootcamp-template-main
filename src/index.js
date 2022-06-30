@@ -1,42 +1,44 @@
-const createUser = (u) => {
-    userContainer.innerHTML = "";
-    FirstName = document.createElement('h4');
-    LastName = document.createElement('h4');
-    Address = document.createElement('h4');
-    Phone = document.createElement('h4');
-    Email = document.createElement('h4');
-    Height = document.createElement('h4');
-    Weight = document.createElement('div');
-    WeightStart = document.createElement('h4');
-    StartBmi = document.createElement('h4');
-    CurrentBmi = document.createElement('h4');
-    WeightMeetings = document.createElement('h4');
-    FirstName.innerHTML = u.firstName;
-    LastName.innerHTML = u.lastName;
-    Address.innerHTML = u.address.street + " " + u.address.number + " " + u.address.city;
-    Phone.innerHTML = u.phone;
-    Email.innerHTML = u.email;
-    Height.innerHTML = u.height;
-    WeightStart.innerHTML = "Start Weight: " + u.weight.start;
-    StartBmi.innerHTML = "Start BMI: " + u.weight.start / (u.height * u.height);
-    CurrentBmi.innerHTML = "CurrentBmi: " + u.weight.meetings[u.weight.meetings.length - 1].weight / (u.height * u.height);
-    WeightMeetings.innerHTML = "Meetings: ";
-    u.weight.meetings.forEach(m => {
-        let table = '';
-        table += `
-        <tr>
-            <th>${m.date}</a></th>
-            <th>${m.weight}</th>
-        </tr>`
-        containerMeetings = document.querySelector('.userTable');
-        containerMeetings.innerHTML += table;
-    })
-    userContainer.style.display = "flex";
-    userContainer.style.flexDirection = "column";
-    userContainer.style.padding = "10px";
-    userContainer.style.alignItems = "start";
-    userContainer.append(FirstName, LastName, Address, Phone, Email, Height, WeightStart, StartBmi, CurrentBmi, WeightMeetings);
-
+ShowUser = (user) => {
+    if (user != null) {
+        const div = document.createElement('div');
+        div.classList.add('user');
+        div.classList.add('divUser');
+        const div2 = document.createElement('div');
+        const div3 = document.createElement('div');
+        const span = document.createElement('span');
+        const address = document.createElement('span');
+        const city = document.createElement('span');
+        const street = document.createElement('span');
+        const number = document.createElement('span');
+        const span2 = document.createElement('span');
+        const phonespan = document.createElement('span');
+        const emailspan = document.createElement('span');
+        span.innerHTML = user.firstName + ' ' + user.lastName;
+        city.innerHTML = user.address.city;
+        street.innerHTML = user.address.street;
+        number.innerHTML = user.address.number;
+        address.append(city);
+        address.append(street);
+        address.append(number);
+        phonespan.innerHTML = user.phone;
+        emailspan.innerHTML = user.email;
+        div3.append(span);
+        div3.append(span2);
+        div3.append(address);
+        div3.append(phonespan);
+        div3.append(emailspan);
+        const h5 = document.createElement('h5');
+        h5.innerHTML = 'id:' + user.id;
+        div3.append(h5);
+        const h = document.createElement('h6');
+        h.innerHTML = 'weight' + user.weight[user.weight.length - 1];
+        div3.append(h);
+        div2.append(div3);
+        const div4 = document.createElement('div');
+        div.append(div2);
+        div.append(div4);
+        this.printUser.append(div);
+    }
 }
 
 //get the data from the json file
@@ -48,23 +50,29 @@ const getusersList = () => {
         if (xhr.status != 200) {
             alert(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
-            users = JSON.parse(Request.responseText).users;
-            users.forEach(user => {
-                if (user.id === userURL) {
-                    createUser(user);
-                }
+            usersList.users = JSON.parse(xhr.responseText).users;
+            usersList.manager = JSON.parse(xhr.responseText).manager;
+            console.log(usersList.manager);
+            let table = '';
+            usersList.users.forEach(user => {
+                table += `
+             <tr>
+                 <th>${user.firstName + ' ' + user.lastName}</th>
+                 <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
+             </tr>`
             })
+            const container = document.querySelector('.ShowUser');
+            container.innerHTML += table;
         }
     }
 };
 
-let filterUsers;
-// let usersList;
-
+filterUsers = new Array();
 //pushing to the products id
 AddUser = (user) => {
     return usersList.push(user);
 }
+
 u = false;
 ShowFilterUsers = (user) => {
     if (this.filterUsers.length !== 0) {
@@ -81,6 +89,8 @@ ShowFilterUsers = (user) => {
 }
 
 printUsersFilter = () => {
+    const container = document.querySelector('.ShowUser');
+    container.innerHTML = '';
     let table = '';
     this.filterUsers.forEach(user => {
         console.log(user);
@@ -90,7 +100,6 @@ printUsersFilter = () => {
              <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
          </tr>`
     })
-    const container = document.querySelector('.ShowUser');
     container.innerHTML += table;
 }
 
@@ -147,9 +156,46 @@ Search = (val) => {
         }
         )
     }
+    else{
+        usersList.users.forEach(user => {
+            if (user.firstName === val) {
+                console.log(user);
+                //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.lastName === val) {
+                //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.email === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.phone === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.city === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.street === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address.number === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+            if (user.address === val) {
+                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
+                this.ShowFilterUsers(user);
+            }
+        }
+        )
+    }
     this.printUsersFilter();
 }
-// }
 
 const btnAdd = document.querySelector('#btnAdd');
 const btnDelete = document.querySelector('#btnDelete');
@@ -181,81 +227,30 @@ const usersList = {
 
 getusersList();
 
-// btnAdd.onclick = () => {
-//     console.log("dfehu")
-//     u = new User(UserName.value, UserWeight.value);
-//     //m.AddUser(u);
-//     const Request = new XMLHttpRequest();
-//     Request.open('POST', './users.json', true);
-//     xhr.setRequestHeader('Content-type', u);
-//     xhr.onload = function () {
-//         // do something to response
-//         console.log(this.responseText);
-//     };
-
-// }
-
-btnUpdate.onclick = (e) => {
-    e.preventDefault();
-    FirstName.setAttribute('contenteditable', 'true');
-    LastName.setAttribute('contenteditable', 'true');
-    Address.setAttribute('contenteditable', 'true');
-    Phone.setAttribute('contenteditable', 'true');
-    Email.setAttribute('contenteditable', 'true');
-    Height.setAttribute('contenteditable', 'true');
-    FirstName.style.color = 'gray';
-    LastName.style.color = 'gray';
-    Address.style.color = 'gray';
-    Phone.style.color = 'gray';
-    Email.style.color = 'gray';
-    Height.style.color = 'gray';
-
-}
-
-
-// //on delete click
-// btnDelete.onclick = () => {
-//     Id = document.querySelector('#idDelete');
-
-
-//     btnDelete.onclick = (id) => {
-//         for (let i = 0; i < usersList.users.length; i++) {
-//             console.log("id delete is working");
-//             if (user.id === parseInt(id)) {
-//                 delete usersList[i];
-//             }
-//         }
-//         console.log("deleted succesfully!")
-//         console.log(usersList.users)
-//     }
-//}
 
 showUserById.onclick = () => {
-    id = idShow.value;
+    let id = idShow.value;
     usersList.users.forEach(user => {
         if (user.id === parseInt(id)) {
-            newUser = new User(user.firstName, user.weight);
-            newUser.ShowUser(user);
+            ShowUser(user);
         }
     })
 }
 
 searchBtn.onclick = () => {
-    // search();
-    m = new Manager();
     if (id.checked)
-        m.Search(parseInt(idSearch.value));
+        Search(parseInt(idSearch.value));
     if (firstName.checked)
-        m.Search(firstNameSearch.value);
+        Search(firstNameSearch.value);
     if (lastName.checked)
-        m.Search(lastNameSearch.value);
+        Search(lastNameSearch.value);
     if (address.checked) {
         if (citySearch.value)
-            m.Search(citySearch.value);
+            Search(citySearch.value);
         if (streetSearch.value)
-            m.Search(streetSearch);
+            Search(streetSearch);
         if (numberSearch.value)
-            m.Search(numberSearch.value);
+            Search(numberSearch.value);
     }
 }
 
