@@ -125,3 +125,15 @@ SearchFoods.onsubmit = (e) => {
         )
         .catch(err => console.error(err));
 }
+
+search.onchange=()=>{
+    e.preventDefault();
+    const req = fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${search.value}`)
+    req.then(response => response.json())
+        .then(response => {
+            productsArr = response.result.records;
+            creatTable();
+        }
+        )
+        .catch(err => console.error(err));
+}
