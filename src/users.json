@@ -8,50 +8,82 @@
   },
   "users": [
     {
-      "id": 1,
-      "firstName": "Shira",
-      "lastName": "Sharabani",
-      "address": {
-        "city": "Modiin-Ilit",
-        "street": "sd.yechzkel",
-        "number": "5"
-      },
-      "phone": "0556796376",
-      "email": "shirasharabani@gmail.com",
-      "height": "1.70",
-      "weight": [
-        60,
-        58,
-        56
-      ],
-      "managerDaily": [
-        {
-          "p": [
-            {
-              "breakfast": [
-                "לבן",
-                "לחם"
-              ]
-            },
-            {
-              "lunch": []
-            },
-            {
-              "dinner": []
-            }
-          ],
-          "date": "28-06-2022"
-        }
-      ]
+      "user": {
+        "id": 1,
+        "firstName": "Shira",
+        "lastName": "Sharabani",
+        "address": {
+          "city": "Modiin-Ilit",
+          "street": "sd.yechzkel",
+          "number": "5"
+        },
+        "phone": "0556796376",
+        "email": "shirasharabani@gmail.com",
+        "height": "1.70",
+        "weight": [
+          60,
+          58,
+          56
+        ],
+        "managerDaily": [
+          {
+            "p": [
+              {
+                "breakfast": [
+                  "לבן",
+                  "לחם"
+                ]
+              },
+              {
+                "lunch": []
+              },
+              {
+                "dinner": []
+              }
+            ],
+            "date": "28-06-2022"
+          }
+        ]
+      }
     },
     {
-      "managerDaily": [
-        [],
-        [],
-        [],
-        null
-      ],
-      "id": 2
+      "user": {
+        "id": 2,
+        "firstName": "Esti",
+        "lastName": "Lev",
+        "address": {
+          "city": "Modiin-Ilit",
+          "street": "Netivot Hamishpat",
+          "number": "18"
+        },
+        "phone": "0583281357",
+        "email": "st3281357@gmail.com",
+        "height": "1.62",
+        "weight": [
+          60,
+          58,
+          56
+        ],
+        "managerDaily": [
+          {
+            "p": [
+              {
+                "breakfast": [
+                  "לבן",
+                  "לחם"
+                ]
+              },
+              {
+                "lunch": []
+              },
+              {
+                "dinner": []
+              }
+            ],
+            "date": "28-06-2022"
+          }
+        ]
+      }
     }
   ]
 }
