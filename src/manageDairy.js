@@ -114,9 +114,6 @@ btnAddBreakfast.onclick = () => {
     const inputDesc = document.createElement('input');
     inputDesc.type = "text";
     inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
     inputDesc.onchange = () => {
         daily[0].push(inputDesc.value);
     }
@@ -124,6 +121,7 @@ btnAddBreakfast.onclick = () => {
     //     daily.push(inputDate.value);
     // }
     console.log(daily);
+    div.append(inputDesc);
 }
 
 btnAddLunch.onclick = () => {
@@ -224,3 +222,5 @@ btnSave.onclick = () => {
         console.log(user);
     });
 }
+
+
