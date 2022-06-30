@@ -33,17 +33,17 @@ showTheDaily = () => {
         if (user.id === userURL && user.managerDaily.length > 0)
             user.managerDaily.forEach(day => {
                 const div = document.createElement('div');
-                if (day.p) {
+                if (day!==null && day.length > 0) {
                     day.p.forEach(f => {
                         const desc = document.createElement('span');
                         desc.innerHTML = f + ' ';
                         div.append(desc);
                     })
+                    const date = document.createElement('span');
+                    date.innerHTML = day.date;
+                    div.append(date);
+                    show.append(div);
                 }
-                const date = document.createElement('span');
-                date.innerHTML = day.date;
-                div.append(date);
-                show.append(div);
             })
     });
 }
@@ -208,43 +208,43 @@ btnDate.onclick = () => {
 }
 
 btnSave.onclick = () => {
-  //  usersList.users.forEach(user => {
-        // if (user.id === userURL) {
-        //     daily[0].forEach(fOrD => {
-        //         user.managerDaily[0].p[0].breakfast.push(fOrD);
-        //     })
-        //     daily[1].forEach(fOrD => {
-        //         user.managerDaily[0].p[1].lunch.push(fOrD);
-        //     })
-        //     daily[2].forEach(fOrD => {
-        //         user.managerDaily[0].p[2].dinner.push(fOrD);
-        //     })
-        //     user.managerDaily[0].date = daily[3];
-        // }
-        // console.log(user);
+    //  usersList.users.forEach(user => {
+    // if (user.id === userURL) {
+    //     daily[0].forEach(fOrD => {
+    //         user.managerDaily[0].p[0].breakfast.push(fOrD);
+    //     })
+    //     daily[1].forEach(fOrD => {
+    //         user.managerDaily[0].p[1].lunch.push(fOrD);
+    //     })
+    //     daily[2].forEach(fOrD => {
+    //         user.managerDaily[0].p[2].dinner.push(fOrD);
+    //     })
+    //     user.managerDaily[0].date = daily[3];
+    // }
+    // console.log(user);
+    console.log(userURL);
+    fetch(`  http://localhost:3000/users/${userURL}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
 
-        fetch(`./users.json/${userURL}`, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            method: "PUT",
-
-            // Sending only the fields that to be updated
-            body: JSON.stringify({
-                managerDaily: daily
-            })
+        // Sending only the fields that to be updated
+        body: JSON.stringify({
+            managerDaily: daily
         })
-            .then(function (response) {
+    })
+        .then(function (response) {
 
-                console.log(response);
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            });
-        //     daily = [new Array(), new Array(), new Array(), String];
-   // });
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+    //     daily = [new Array(), new Array(), new Array(), String];
+    // });
 }
 
 // saveInJson = (obj) => {

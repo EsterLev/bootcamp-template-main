@@ -45,13 +45,38 @@
       ]
     },
     {
-      "managerDaily": [
-        [],
-        [],
-        [],
-        null
+      "id": 2,
+      "firstName": "Esti",
+      "lastName": "Lev",
+      "address": {
+        "city": "Modiin-Ilit",
+        "street": "Netinot Hamishpat",
+        "number": "18"
+      },
+      "phone": "0583281357",
+      "email": "st3281357@gmail.com",
+      "height": "1.62",
+      "weight": [
+        60,
+        58,
+        56
       ],
-      "id": 2
+      "managerDaily": [
+        {
+          "p": [
+            {
+              "breakfast": []
+            },
+            {
+              "lunch": []
+            },
+            {
+              "dinner": []
+            }
+          ],
+          "date": ""
+        }
+      ]
     }
   ]
 }
