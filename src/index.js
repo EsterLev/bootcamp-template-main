@@ -41,7 +41,7 @@ ShowUser = (user) => {
     }
 }
 
-//get the data from the json file
+//get the users from the json file
 const getusersList = () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", './users.json');
@@ -68,11 +68,12 @@ const getusersList = () => {
 };
 
 filterUsers = new Array();
-//pushing to the products id
+//pushing to the user to the array
 AddUser = (user) => {
     return usersList.push(user);
 }
 
+//show the filter users results
 u = false;
 ShowFilterUsers = (user) => {
     if (this.filterUsers.length !== 0) {
@@ -97,11 +98,12 @@ printUsersFilter = () => {
         table += `
          <tr>
              <th>${user.firstName + ' ' + user.lastName}</th>
-             <th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
          </tr>`
     })
     container.innerHTML += table;
 }
+
+//<th>${user.weight[usersList.users.length - 1] / Math.sqrt(user.height)}</th><br/>
 
 printUsers = () => {
     let table = '';
@@ -254,5 +256,10 @@ searchBtn.onclick = () => {
     }
 }
 
+//add user
 
+//update user
+//delete user
+//show user by id
+//search
 
