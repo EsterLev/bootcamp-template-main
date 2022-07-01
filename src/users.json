@@ -26,18 +26,18 @@
       ],
       "managerDaily": [
         {
-          "p": [
+          "meals": [
             {
-              "breakfast": [
+              "meal": [
                 "לבן",
                 "לחם"
               ]
             },
             {
-              "lunch": []
+              "meal": []
             },
             {
-              "dinner": []
+              "meal": []
             }
           ],
           "date": "28-06-2022"
@@ -63,18 +63,17 @@
       ],
       "managerDaily": [
         {
-          "p": [
+          "meals": [
             {
-              "breakfast": [
-                "לבן",
-                "לחם"
+              "meal": [
+                "תפוח"
               ]
             },
             {
-              "lunch": []
+              "meal": []
             },
             {
-              "dinner": []
+              "meal": []
             }
           ],
           "date": "28-06-2022"
@@ -82,19 +81,18 @@
       ]
     },
     {
-      "firstName": "tamar",
+      "firstName": "Tamar",
       "lastName": "Lev",
       "address": {
         "city": "enter city",
+        "street": "Netivot Hamishpat",
         "number": "enter number"
       },
-      "phone": "0589745321",
-      "mail": "enter mail address",
+      "phone": "0589742357",
+      "email": "enter mail address",
       "height": "1.55",
-      "weight": "37",
-      "id": 3,
-      "address.city": "modiin ilit",
-      "address.number": "18"
+      "weight": "38",
+      "id": 3
     }
   ]
 }
