@@ -57,12 +57,14 @@ const getusersList = () => {
                 table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
-                 <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th><br/>
-             </tr>`
+                 <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th>
+                 </tr>`
                 //  <th><button type="submit" id="moreDetails">more details</button></th>
-                //  const moreDetails = document.getElementById('moreDetails');
-                //  moreDetails.onclick=()=>{
-                //      theCurrentUser(user.id);
+
+                //  const btnMoreDetails = document.querySelector('#moreDetails');
+                //  btnMoreDetails.onclick=()=>{
+                //     alert('dgf')
+                //     // theCurrentUser(user.id);
                 //  }
             })
 
@@ -100,7 +102,7 @@ AddUser = () => {
             <th><input type="text" id="mail" value="enter mail address"></input></th>
             <th><input type="text" id="height" value="enter height"></input></th>
             <th><input type="text" id="weight" value="enter weight"></input></th>
-            <th><button type="submit" id="save" value="save changea">save changes</button></th>
+            <th><button type="submit" id="save" value="save changea"></button></th>
         </tr>`
     form.innerHTML += table;
     const btnSave = document.getElementById('save');
@@ -128,7 +130,7 @@ AddUser = () => {
         currentUser.height = height.value;
         currentUser.weight = new Array();
         currentUser.weight.push(weight.value);
-        currentUser.id = usersList.users.length+1;
+        currentUser.id = usersList.users.length + 1;
         //console.log(currentUser)
         fetch(`http://localhost:3000/users/`, {
             method: `POST`,
@@ -305,11 +307,15 @@ getusersList();
 
 showUserById.onclick = () => {
     let id = idShow.value;
-    usersList.users.forEach(user => {
-        if (user.id === parseInt(id)) {
-            ShowUser(user);
+    usersList.users.forEach(u => {
+        if (u.id === parseInt(id)) {
+            flag = 1;
+            window.location.href = './user.html?id=' + `${u.id}`;
+            console.log(window.location.href);
         }
     })
+    if (flag === 0)
+        alert('you have error');
 }
 
 searchBtn.onclick = () => {
