@@ -29,22 +29,23 @@ getJson();
 
 //shows the daily description
 showTheDaily = () => {
+    const div = document.createElement('div');
     usersList.users.forEach(user => {
-        if (user.id === userURL && user.managerDaily.length > 0)
-            user.managerDaily.forEach(day => {
-                const div = document.createElement('div');
-                if (day !== null && day.length > 0) {
-                    day.p.forEach(f => {
+        if (user.id === userURL && user.managerDaily && user.managerDaily[0].meals.length > 0) {
+            user.managerDaily[0].meals.forEach(day => {
+                if (day !== null) {
+                    day.meal.forEach(f => {
                         const desc = document.createElement('span');
                         desc.innerHTML = f + ' ';
                         div.append(desc);
                     })
-                    const date = document.createElement('span');
-                    date.innerHTML = day.date;
-                    div.append(date);
-                    show.append(div);
                 }
             })
+            const date = document.createElement('span');
+            date.innerHTML = user.managerDaily[0].date;
+            div.append(date);
+            show.append(div);
+        }
     });
 }
 
@@ -54,60 +55,10 @@ btnshow.onclick = () => {
     showTheDaily();
 }
 
-const daily = new Array();
-const breakfast = new Array();
-const lunch = new Array();
-const dinner = new Array();
-const date = Date.now;
-daily.push(breakfast, lunch, dinner, date);
+const daily = [new Array(new Array(), new Array(), new Array()), String];
 
-
-// tryAdd=()=> {
-//     let text;
-//     let dateOfMeal = prompt("Please enter the date:", "Harry Potter");
-//     if (dateOfMeal == null || dateOfMeal == "") {
-//       text = "unvalid date";
-//     } else {
-//       text = "you chose " + dateOfMeal + "! what did you eat today?";
-
-//     }
-//     document.getElementById("trying").innerHTML = text;
-//   }
-//add the description of the food for each day
-// btnAdd.onclick = (e) => {
-//     const desc = document.createElement('span');
-//     desc.innerHTML = "what you eat? give a description";
-//     const btnMeals=document.createElement('button');
-//     btnMeals.innerText="meals"
-//     div.append(btnMeals)   
-// }
 
 btnAddBreakfast.onclick = () => {
-    // // Get the modal
-    // var modal = document.getElementById("myModal");
-
-    // // Get the button that opens the modal
-    // var btn = document.getElementById("myBtn");
-
-    // // Get the <span> element that closes the modal
-    // var span = document.getElementsByClassName("close")[0];
-
-    // // When the user clicks the button, open the modal 
-    // btn.onclick = function () {
-    //     modal.style.display = "block";
-    // }
-
-    // // When the user clicks on <span> (x), close the modal
-    // span.onclick = function () {
-    //     modal.style.display = "none";
-    // }
-
-    // // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function (event) {
-    //     if (event.target == modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
     const div = document.createElement('div');
     const desc = document.createElement('span');
     desc.innerHTML = "what you eat? give a description";
@@ -118,7 +69,11 @@ btnAddBreakfast.onclick = () => {
     div.append(inputDesc);
     addFoods.append(div);
     inputDesc.onchange = () => {
-        daily[0].push(inputDesc.value);
+        if (daily[0] === undefined)
+            daily[0] = new Array();
+        if (daily[0[0]] === undefined)
+            daily[0[0]] = new Array();
+        daily[0[0]].push(inputDesc.value);
     }
     // inputDate.onchange=()=>{
     //     daily.push(inputDate.value);
@@ -137,7 +92,7 @@ btnAddLunch.onclick = () => {
     div.append(inputDesc);
     addFoods.append(div);
     inputDesc.onchange = () => {
-        daily[1].push(inputDesc.value);
+        daily[0[1]].push(inputDesc.value);
     }
     console.log(daily);
 }
@@ -153,7 +108,7 @@ btnAddDinner.onclick = () => {
     div.append(inputDesc);
     addFoods.append(div);
     inputDesc.onchange = () => {
-        daily[2].push(inputDesc.value);
+        daily[0[2]].push(inputDesc.value);
     }
     console.log(daily);
 }
@@ -229,23 +184,7 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
-    daily = [new Array(), new Array(), new Array(), String];
+    daily = [new Array(new Array(), new Array(), new Array()), String];
 }
-
-// saveInJson = (obj) => {
-//     console.log(obj);
-//     arrDairy.push(obj);
-//     console.log(arrDairy);
-//     fetch(`http://localhost:3000/users/${userURL}`, {
-//         method: `PATCH`,
-//         body: JSON.stringify({
-//             "dairy": arrDairy,
-//         }),
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//     }).then(response => console.log(response));
-//     arrDairy = [];
-// }
 
 
