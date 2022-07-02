@@ -199,35 +199,27 @@ Search = (val) => {
         this.filterUsers.forEach(user => {
             if (user.firstName === val) {
                 console.log(user);
-                //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.lastName === val) {
-                //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.email === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.phone === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.city === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.street === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.number === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
         }
@@ -237,35 +229,27 @@ Search = (val) => {
         usersList.users.forEach(user => {
             if (user.firstName === val) {
                 console.log(user);
-                //newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.lastName === val) {
-                //    newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.email === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.phone === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.city === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.street === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address.number === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
             if (user.address === val) {
-                // newUser = new User(user.firstName, user.lastName, user.city, user.street, user.number, user.phone, user.email, user.height, user.weight);
                 this.ShowFilterUsers(user);
             }
         }

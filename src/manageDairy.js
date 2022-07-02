@@ -54,96 +54,105 @@ showTheDaily = () => {
 btnshow.onclick = () => {
     showTheDaily();
 }
-
 const daily = [new Array(new Array(), new Array(), new Array()), String];
+const btnMeals = document.getElementById('btnMeals');
 
-
-btnAddBreakfast.onclick = () => {
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        if (daily[0] === undefined)
-            daily[0] = new Array();
-        if (daily[0[0]] === undefined)
-            daily[0[0]] = new Array();
-        daily[0[0]].push(inputDesc.value);
-    }
-    // inputDate.onchange=()=>{
-    //     daily.push(inputDate.value);
-    // }
-    console.log(daily);
-}
-
-btnAddLunch.onclick = () => {
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        daily[0[1]].push(inputDesc.value);
-    }
-    console.log(daily);
-}
-
-btnAddDinner.onclick = () => {
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        daily[0[2]].push(inputDesc.value);
-    }
-    console.log(daily);
-}
-
-//creating description per meals
-// btnMeals.onclick=()=>{
-//     //meals
-//     const brekfest=document.createElement('span');
-//     inputDescription(brekfest)
-//     const lunch=document.createElement('span');
-//     inputDescription(lunch)
-//     const dinner=document.createElement('span');
-//     inputDescription(dinner)
-
-//     div.append(brekfest);
-//     div.append(lunch);
-//     div.append(dinner);
-
-//     addFoods.append(div);  
-
-//   }
-//fill the inputs for each meal
-// inputDescription = (e) => {
+// btnAddBreakfast.onclick = () => {
+//     const div = document.createElement('div');
+//     const desc = document.createElement('span');
+//     desc.innerHTML = "what you eat? give a description";
 //     const inputDesc = document.createElement('input');
 //     inputDesc.type = "text";
 //     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
 //     inputDesc.onchange = () => {
-//         daily.push(inputDesc.value);
+//         if (daily[0] === undefined)
+//             daily[0] = new Array();
+//         if (daily[0[0]] === undefined)
+//             daily[0[0]] = new Array();
+//         daily[0[0]].push(inputDesc.value);
 //     }
 //     // inputDate.onchange=()=>{
 //     //     daily.push(inputDate.value);
 //     // }
 //     console.log(daily);
-//     div.append(inputDesc);
 // }
+
+// btnAddLunch.onclick = () => {
+//     const div = document.createElement('div');
+//     const desc = document.createElement('span');
+//     desc.innerHTML = "what you eat? give a description";
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
+//     inputDesc.onchange = () => {
+//         daily[0[1]].push(inputDesc.value);
+//     }
+//     console.log(daily);
+// }
+
+// btnAddDinner.onclick = () => {
+//     const div = document.createElement('div');
+//     const desc = document.createElement('span');
+//     desc.innerHTML = "what you eat? give a description";
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
+//     inputDesc.onchange = () => {
+//         daily[0[2]].push(inputDesc.value);
+//     }
+//     console.log(daily);
+// }
+
+const div = document.createElement('div');
+
+//creating description per meals
+btnMeals.onclick = () => {
+    //meals
+    const breakfest = document.createElement('span');
+    inputDescription(breakfest, 'breakfests')
+    const lunch = document.createElement('span');
+    inputDescription(lunch, 'lunch')
+    const dinner = document.createElement('span');
+    inputDescription(dinner, 'dinner')
+
+    div.append(breakfest);
+    div.append(lunch);
+    div.append(dinner);
+
+    addFoods.append(div);
+
+}
+//fill the inputs for each meal
+inputDescription = (span, desc) => {
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.id = "valueDesc";
+    inputDesc.onchange = () => {
+        if (desc === 'breakfests')
+            daily[daily.length[0]].push(inputDesc.value);
+        else {
+            if (desc === 'lunch')
+                daily[daily.length[1]].push(inputDesc.value);
+            else{
+                daily[daily.length[2]].push(inputDesc.value);
+            }
+        }
+    }
+    // inputDate.onchange=()=>{
+    //     daily.push(inputDate.value);
+    // }
+    console.log(daily);
+    div.append(inputDesc);
+}
 
 
 //update date
@@ -158,7 +167,7 @@ btnDate.onclick = () => {
     div.append(inputDate);
     addFoods.append(div);
     inputDate.onchange = () => {
-        daily[3] = inputDate.value;
+        daily[daily.length].date = inputDate.value;
     }
 }
 
@@ -169,7 +178,7 @@ btnSave.onclick = () => {
             Accept: "application/json",
             "Content-Type": "application/json"
         },
-        method: "PUT",
+        method: "PATCH",
 
         // Sending only the fields that to be updated
         body: JSON.stringify({
