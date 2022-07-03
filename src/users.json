@@ -25,12 +25,17 @@
         56
       ],
       "managerDaily": [
-        [
-          "לחם"
-        ],
-        [
-          "אורז"
-        ]
+        {
+          "days": [
+            {
+              "meals": [
+                "לבן",
+                "לחם"
+              ],
+              "date": "28-06-2022"
+            }
+          ]
+        }
       ]
     },
     {
@@ -76,6 +81,19 @@
       "height": "1.55",
       "weight": "38",
       "id": 3
+    },
+    {
+        "firstName": "enter first name",
+        "lastName": "enter last name",
+        "address": {
+          "city": "enter city",
+          "number": "enter number"
+        },
+        "phone": "enter phone number",
+        "mail": "enter mail address",
+        "height": 1.75,
+        "weight": [70],
+        "id": 4
     }
   ]
 }
