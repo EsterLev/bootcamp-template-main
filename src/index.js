@@ -41,78 +41,79 @@ ShowUser = (user) => {
     }
 }
 
-getJson = () =>{
-    fetch(`http://localhost:3000/`)
-    .then(response => {
-        console.log(response);
-        return response.json();
-    }).then(data => {
-        usersList.manager = data.manager;
-        usersList.users = data.users;
-        getusersList();
-    });
+// getJson = () =>{
+//     fetch(`http://localhost:3000/`)
+//     .then(response => {
+//         console.log(response);
+//         return response.json();
+//     }).then(data => {
+//         usersList.manager = data.manager;
+//         usersList.users = data.users;
+//         getusersList();
+//     });
 
-}
+// }
 
-getJson();
+// getJson();
 //get the users from the json file
 const getusersList = () => {
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("GET", './users.json');
-    // xhr.send();
-    // xhr.onload = function () {
-    //     if (xhr.status != 200) {
-    //         alert(`Error ${xhr.status}: ${xhr.statusText}`);
-    //     } else {
-    //         usersList.users = JSON.parse(xhr.responseText).users;
-    //         usersList.manager = JSON.parse(xhr.responseText).manager;
-    
-    let table = '';
-    let num = 0;
-    usersList.users.forEach(user => {
-        num++;
-        console.log(user);
-        let table = '';
-        table += `
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", './users.json');
+    xhr.send();
+    xhr.onload = function () {
+        if (xhr.status != 200) {
+            alert(`Error ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            usersList.users = JSON.parse(xhr.responseText).users;
+            usersList.manager = JSON.parse(xhr.responseText).manager;
+
+            let table = '';
+            let num = 0;
+            usersList.users.forEach(user => {
+                num++;
+                console.log(user);
+                let table = '';
+                table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
                  <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th><br/>
              </tr>`
-        //  <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
+                //  <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
 
-        const container = document.querySelector('.ShowUser');
-        container.innerHTML += table;
-        // const moreDetails = document.getElementById('moreDetails');
-        // moreDetails.onclick = () => {
-        //     usersList.users.forEach(u => {
-        //         if (parseInt(moreDetails.className) === u.id)
-        //             theCurrentUser(u.id);
-        //     })
-        //     window.location.href = './user.html?id=' + `${currentUser.id}`;
-        // }
-    })
-};
-
-let currentUser = "";
-theCurrentUser = (id) => {
-    usersList.users.forEach(u => {
-        if (u.id === id) {
-            currentUser = u;
-            console.log("the current" + currentUser);
+                const container = document.querySelector('.ShowUser');
+                container.innerHTML += table;
+                // const moreDetails = document.getElementById('moreDetails');
+                // moreDetails.onclick = () => {
+                //     usersList.users.forEach(u => {
+                //         if (parseInt(moreDetails.className) === u.id)
+                //             theCurrentUser(u.id);
+                //     })
+                //     window.location.href = './user.html?id=' + `${currentUser.id}`;
+                // }
+            })
         }
-    })
-}
+    };
 
-filterUsers = new Array();
+    let currentUser = "";
+    theCurrentUser = (id) => {
+        usersList.users.forEach(u => {
+            if (u.id === id) {
+                currentUser = u;
+                console.log("the current" + currentUser);
+            }
+        })
+    }
 
-const form = document.getElementById('form');
+    filterUsers = new Array();
 
-//pushing to the products id
-AddUser = () => {
-    form.innerHTML = '';
-    let table = '';
-    //e.preventDefault();
-    table += `
+    const form = document.getElementById('form');
+
+    //pushing to the products id
+    AddUser = () => {
+        form.innerHTML = '';
+        let table = '';
+        //e.preventDefault();
+        table += `
         <tr>
             <th><input type="text" id="first" value="enter first name"></input></th>
             <th><input type="text" id="last" value="enter last name"></input></th>
@@ -125,53 +126,53 @@ AddUser = () => {
             <th><input type="number" id="weight" value="enter weight"></input></th>
             <th><button type="submit" id="save">save changea</button></th>
         </tr>`
-    form.innerHTML += table;
-    const btnSave = document.getElementById('save');
-    const firstname = document.getElementById('first');
-    const lastname = document.getElementById('last');
-    const city = document.getElementById('city');
-    const street = document.getElementById('street');
-    const number = document.getElementById('number');
-    const phone = document.getElementById('phone');
-    const mail = document.getElementById('mail');
-    const height = document.getElementById('height');
-    const weight = document.getElementById('weight');
+        form.innerHTML += table;
+        const btnSave = document.getElementById('save');
+        const firstname = document.getElementById('first');
+        const lastname = document.getElementById('last');
+        const city = document.getElementById('city');
+        const street = document.getElementById('street');
+        const number = document.getElementById('number');
+        const phone = document.getElementById('phone');
+        const mail = document.getElementById('mail');
+        const height = document.getElementById('height');
+        const weight = document.getElementById('weight');
 
-    btnSave.onclick = () => {
-        currentUser = new Object();
-        currentUser.firstName = firstname.value;
-        currentUser.lastName = lastname.value;
-        currentUser.address = new Object();
-        currentUser.address.city = city.value;
-        //currentUser.address.street = street.value;
-        currentUser.address.number = number.value;
-        currentUser.phone = phone.value;
-        currentUser.mail = mail.value;
-        currentUser.height = height.value;
-        currentUser.id = usersList.users.length + 1;
-        currentUser.weight = weight.value;
-        console.log(currentUser)
-        fetch(`http://localhost:3000/users/`, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
+        btnSave.onclick = () => {
+            currentUser = new Object();
+            currentUser.firstName = firstname.value;
+            currentUser.lastName = lastname.value;
+            currentUser.address = new Object();
+            currentUser.address.city = city.value;
+            //currentUser.address.street = street.value;
+            currentUser.address.number = number.value;
+            currentUser.phone = phone.value;
+            currentUser.mail = mail.value;
+            currentUser.height = height.value;
+            currentUser.id = usersList.users.length + 1;
+            currentUser.weight = weight.value;
+            console.log(currentUser)
+            fetch(`http://localhost:3000/users/`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
 
-            // Sending only the fields that to be updated
-            body: JSON.stringify({
-                user: currentUser.user
+                // Sending only the fields that to be updated
+                body: JSON.stringify({
+                    user: currentUser.user
+                })
             })
-        })
-            .then(function (response) {
-                console.log(response);
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                });
+        }
     }
-
 }
 
 u = false;
