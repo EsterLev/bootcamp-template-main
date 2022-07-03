@@ -10,18 +10,14 @@ const userURL = parseInt(searchURL.get('id'));
 const btnshow = document.getElementById('btnshow');
 const btnDate = document.getElementById('btnDate');
 
-const usersList = {
-    manager: {},
-    users: {},
-};
+let theUser = '';
 
 const getJson = () => {
-    fetch('./users.json')
+    fetch(`http://localhost:3000/users/${userURL}`)
         .then(response => {
             return response.json();
         }).then(data => {
-            usersList.users = data.users;
-            usersList.manager = data.manager;
+            theUser = data;
         })
 };
 
@@ -30,31 +26,28 @@ getJson();
 //shows the daily description
 showTheDaily = () => {
     const div = document.createElement('div');
-    usersList.users.forEach(user => {
-        if (user.id === userURL && user.managerDaily && user.managerDaily[0].meals.length > 0) {
-            user.managerDaily[0].meals.forEach(day => {
-                if (day !== null) {
-                    day.meal.forEach(f => {
-                        const desc = document.createElement('span');
-                        desc.innerHTML = f + ' ';
-                        div.append(desc);
-                    })
-                }
+    theUser.managerDaily[0].days.forEach(day => {
+        console.log(day);
+        if (day !== null) {
+            day.meals.forEach(meals => {
+                meals.meal.forEach(meal => {
+                    const desc = document.createElement('span');
+                    desc.innerHTML = meal + ' ';
+                    div.append(desc);
+                })
             })
-            const date = document.createElement('span');
-            date.innerHTML = user.managerDaily[0].date;
-            div.append(date);
-            show.append(div);
         }
-    });
+        const date = document.createElement('span');
+        date.innerHTML = theUser.managerDaily[0].days[0].date;
+        div.append(date);
+        show.append(div);
+    })
 }
-
-
 
 btnshow.onclick = () => {
     showTheDaily();
 }
-const daily = [new Array(new Array(), new Array(), new Array()), String];
+const daily = [new Array()];
 const btnMeals = document.getElementById('btnMeals');
 
 // btnAddBreakfast.onclick = () => {
@@ -123,7 +116,6 @@ btnMeals.onclick = () => {
     inputDescription(lunch, 'lunch')
     const dinner = document.createElement('span');
     inputDescription(dinner, 'dinner')
-
     div.append(breakfest);
     div.append(lunch);
     div.append(dinner);
@@ -137,13 +129,21 @@ inputDescription = (span, desc) => {
     inputDesc.type = "text";
     inputDesc.id = "valueDesc";
     inputDesc.onchange = () => {
-        if (desc === 'breakfests')
-            daily[daily.length[0]].push(inputDesc.value);
+        if (desc === 'breakfests') {
+            console.log(daily[0]);
+            // daily[0]=new Array();
+            daily[0].push(inputDesc.value);
+        }
         else {
-            if (desc === 'lunch')
-                daily[daily.length[1]].push(inputDesc.value);
-            else{
-                daily[daily.length[2]].push(inputDesc.value);
+            if (desc === 'lunch') {
+                if (daily[1] === undefined)
+                    daily[1] = new Array();
+                daily[1].push(inputDesc.value);
+            }
+            else {
+                if (daily[2] === undefined)
+                    daily[2] = new Array();
+                daily[2].push(inputDesc.value);
             }
         }
     }
@@ -167,12 +167,16 @@ btnDate.onclick = () => {
     div.append(inputDate);
     addFoods.append(div);
     inputDate.onchange = () => {
-        daily[daily.length].date = inputDate.value;
+        if (daily[0].date === undefined)
+            daily[0].date = Date.now;
+        daily[0].date = inputDate.value;
     }
 }
 
 btnSave.onclick = () => {
     console.log(userURL);
+    if (daily[0].date === undefined)
+        daily[0].date = Date.now;
     fetch(`http://localhost:3000/users/${userURL}`, {
         headers: {
             Accept: "application/json",
@@ -193,7 +197,7 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
-    daily = [new Array(new Array(), new Array(), new Array()), String];
+    daily = [new Array()];
 }
 
 
