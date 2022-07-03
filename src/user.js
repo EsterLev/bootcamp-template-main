@@ -7,11 +7,6 @@ let Phone = "";
 let Email = "";
 let Height = "";
 let Weight = "";
-// let WeightStart = "";
-// let StartBmi = "";
-// let CurrentBmi = "";
-// let WeightMeetings = "";
-// let containerMeetings = "";
 
 printUser = document.querySelector('.ShowUser');
 
@@ -159,10 +154,5 @@ Edit.onclick = (e) => {
             },
         })
             .then(response => console.log(response));
-        //     return response.json();
-        // }
-        // .then(function (data) {
-        //     console.log(data);
-        // });
     }
 }

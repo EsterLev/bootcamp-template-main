@@ -41,42 +41,56 @@ ShowUser = (user) => {
     }
 }
 
+getJson = () =>{
+    fetch(`http://localhost:3000/`)
+    .then(response => {
+        console.log(response);
+        return response.json();
+    }).then(data => {
+        usersList.manager = data.manager;
+        usersList.users = data.users;
+        getusersList();
+    });
+
+}
+
+getJson();
 //get the users from the json file
 const getusersList = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", './users.json');
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
-            let table = '';
-            let num = 0;
-            usersList.users.forEach(user => {
-                num++;
-                console.log(user);
-                let table = '';
-                table += `
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("GET", './users.json');
+    // xhr.send();
+    // xhr.onload = function () {
+    //     if (xhr.status != 200) {
+    //         alert(`Error ${xhr.status}: ${xhr.statusText}`);
+    //     } else {
+    //         usersList.users = JSON.parse(xhr.responseText).users;
+    //         usersList.manager = JSON.parse(xhr.responseText).manager;
+    
+    let table = '';
+    let num = 0;
+    usersList.users.forEach(user => {
+        num++;
+        console.log(user);
+        let table = '';
+        table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
                  <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th><br/>
-                 <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
              </tr>`
-                const container = document.querySelector('.ShowUser');
-                container.innerHTML += table;
-                const moreDetails = document.getElementById('moreDetails');
-                moreDetails.onclick = () => {
-                    usersList.users.forEach(u => {
-                        if (parseInt(moreDetails.className) === u.id)
-                            theCurrentUser(u.id);
-                    })
-                    window.location.href = './user.html?id=' + `${currentUser.id}`;
-                }
-            })
-        }
-    }
+        //  <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
+
+        const container = document.querySelector('.ShowUser');
+        container.innerHTML += table;
+        // const moreDetails = document.getElementById('moreDetails');
+        // moreDetails.onclick = () => {
+        //     usersList.users.forEach(u => {
+        //         if (parseInt(moreDetails.className) === u.id)
+        //             theCurrentUser(u.id);
+        //     })
+        //     window.location.href = './user.html?id=' + `${currentUser.id}`;
+        // }
+    })
 };
 
 let currentUser = "";
@@ -91,10 +105,6 @@ theCurrentUser = (id) => {
 
 filterUsers = new Array();
 
-//pushing to the user to the array
-AddUser = (user) => {
-    return usersList.push(user);
-}
 const form = document.getElementById('form');
 
 //pushing to the products id
@@ -311,20 +321,12 @@ const usersList = {
     users: {},
 };
 
-getusersList();
-
-
 showUserById.onclick = () => {
-    let id = idShow.value;
+    let idUser = parseInt(idShow.value);
     usersList.users.forEach(u => {
-        if (u.id === parseInt(id)) {
-            flag = 1;
-            window.location.href = './user.html?id=' + `${u.id}`;
-            console.log(window.location.href);
-        }
+        if (idUser === u.id)
+            window.location.href = `./user.html?id=` + `${idUser}`;
     })
-    if (flag === 0)
-        alert('you have error');
 }
 
 searchBtn.onclick = () => {
@@ -357,6 +359,3 @@ btnDelete.onclick = () => {
     console.log(id);
     deleteUser(parseInt(id));
 }
-
-//show user by id
-//search
