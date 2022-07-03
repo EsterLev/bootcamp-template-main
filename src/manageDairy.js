@@ -199,5 +199,3 @@ btnSave.onclick = () => {
         });
     daily = [new Array()];
 }
-
-

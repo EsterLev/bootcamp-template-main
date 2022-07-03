@@ -144,10 +144,6 @@ req.then(response => response.json())
         for(let x = 0, b = document.createDocumentFragment(), c = false; x < productsArr.length; x++) {
           if(a.test(productsArr[x].shmmitzrach)) {
             c = true;
-            // var d = document.createElement("p");
-            // d.innerText = productsArr[x].shmmitzrach;
-            // d.setAttribute("onclick", "autocomplete.value=this.innerText;autocomplete_result.innerHTML='';autocomplete_result.style.display='none';");
-            // b.appendChild(d);
             productsArrFilter.push(productsArr[x]);
           }
         }
