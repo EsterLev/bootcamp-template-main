@@ -35,7 +35,7 @@ showTheDaily = () => {
         if (user.id === userURL && user.managerDaily.length > 0)
             user.managerDaily.forEach(day => {
                 const div = document.createElement('div');
-                if (day!==null && day.length > 0) {
+                if (day !== null && day.length > 0) {
                     day.p.forEach(f => {
                         const desc = document.createElement('span');
                         desc.innerHTML = f + ' ';
@@ -210,22 +210,8 @@ btnDate.onclick = () => {
 }
 
 btnSave.onclick = () => {
-    //  usersList.users.forEach(user => {
-    // if (user.id === userURL) {
-    //     daily[0].forEach(fOrD => {
-    //         user.managerDaily[0].p[0].breakfast.push(fOrD);
-    //     })
-    //     daily[1].forEach(fOrD => {
-    //         user.managerDaily[0].p[1].lunch.push(fOrD);
-    //     })
-    //     daily[2].forEach(fOrD => {
-    //         user.managerDaily[0].p[2].dinner.push(fOrD);
-    //     })
-    //     user.managerDaily[0].date = daily[3];
-    // }
-    // console.log(user);
     console.log(userURL);
-    fetch(`  http://localhost:3000/users/${userURL}`, {
+    fetch(`http://localhost:3000/users/${userURL}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
@@ -245,8 +231,7 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
-    //     daily = [new Array(), new Array(), new Array(), String];
-    // });
+    daily = [new Array(), new Array(), new Array(), String];
 }
 
 // saveInJson = (obj) => {
