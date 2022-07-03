@@ -66,13 +66,8 @@ const getusersList = () => {
              </tr>`
                 const container = document.querySelector('.ShowUser');
                 container.innerHTML += table;
-                // usersList.users.forEach(u => {
-                //     const moreDetails = document.querySelector('.'+u.id);
-                //     if (parseInt(moreDetails.className) === u.id)
-                //         theCurrentUser(u.id);
-                // })
+                const moreDetails = document.getElementById('moreDetails');
                 moreDetails.onclick = () => {
-                    const moreDetails = document.getElementById('moreDetails');
                     usersList.users.forEach(u => {
                         if (parseInt(moreDetails.className) === u.id)
                             theCurrentUser(u.id);
