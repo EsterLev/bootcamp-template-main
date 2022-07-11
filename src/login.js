@@ -2,10 +2,10 @@ const loginBtn = document.querySelector('#enter');
 const email = document.querySelector('#mail');
 const phone = document.querySelector('#phone');
 
-const usersList = {
-    manager: {},
-    users: {},
-};
+// const usersList = {
+//     manager: {},
+//     users: {},
+// };
 
 // //get the data from the json file
 // const getUser = (mail, phone) => {
@@ -23,7 +23,8 @@ loginBtn.onsubmit = () => {
     if (mail === undefined || phoneV === undefined) {
         alert("you not enter anything");
     }
-    user = getUser(mail, phoneV);
+    user = get(mail, phoneV);
+    // user = getUser(mail, phoneV);
     if (user !== undefined) {
         if (user.id === '212') {
             window.location.href = './manager.html';
@@ -36,4 +37,31 @@ loginBtn.onsubmit = () => {
         alert("not found try again");
     }
 }
+
+
+async function get(mail, phone) {
+    try {
+
+        const resp = await fetch('http://localhost:3000/login', { 
+            method: 'POST',
+            mode: "cors",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json ',
+                'Accept': 'application/json',
+                "Access-Control-Origin": "*"
+            },
+            body: JSON.stringify(mail, phone)
+        })
+        console.log(resp)
+
+        console.log(resp.body)
+        resp.headers.forEach(console.log);
+
+        return JSON.stringify(resp);
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
