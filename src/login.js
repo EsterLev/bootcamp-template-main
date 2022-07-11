@@ -1,45 +1,39 @@
 const loginBtn = document.querySelector('#enter');
-const loginInput = document.querySelector('#login');
+const email = document.querySelector('#mail');
+const phone = document.querySelector('#phone');
 
 const usersList = {
     manager: {},
     users: {},
 };
 
-//get the data from the json file
-const getusersList = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", './users.json');
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
-            console.log(usersList.manager);
-        }
-    }
-};
+// //get the data from the json file
+// const getUser = (mail, phone) => {
+//     fetch(`http://localhost:3000/login/`)
+//     .then(response => {
+//         console.log(response);
+//         //  usersList.users = response.users; usersList.manager = response.manager; 
+//         })
+// }
 
-getusersList();
 
-loginBtn.onclick = () => {
-    id = loginInput.value;
-    if (id === undefined)
+loginBtn.onsubmit = () => {
+    mail = email.value;
+    phoneV = phone.value;
+    if (mail === undefined || phoneV === undefined) {
         alert("you not enter anything");
-    let flag = 0;
-    if (usersList.manager.id === parseInt(id)) {
-        flag = 1;
-        window.location.href = './manager.html';
     }
-    else (usersList.users.forEach(u => {
-        if (u.id === parseInt(id)) {
-            flag = 1;
+    user = getUser(mail, phoneV);
+    if (user !== undefined) {
+        if (user.id === '212') {
+            window.location.href = './manager.html';
+        }
+        else {
             window.location.href = './user.html?id=' + `${u.id}`;
         }
-    }))
-    if (flag === 0) {
+    }
+    else {
         alert("not found try again");
     }
 }
+

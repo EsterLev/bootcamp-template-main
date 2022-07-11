@@ -19,11 +19,46 @@ const searchURL = new URLSearchParams(location.search);
 const userURL = parseInt(searchURL.get('id'));
 let currentUser = "";
 theCurrentUser = () => {
-    usersList.users.forEach(u => {
-        if (u.id === userURL) {
-            currentUser = u;
-        }
-    })
+    // usersList.users.forEach(u => {
+        // if (u.id === userURL) {
+            // currentUser = u;
+            currentUser =  {
+                "id": 1,
+                "firstName": "Shira",
+                "lastName": "Sharabani",
+                "address": {
+                    "city": "Modiin-Ilit",
+                    "street": "Sd. Yechezkel",
+                    "number": "18"
+                },
+                "phone": "0583281357",
+                "email": "shirasharabani@gmail.com",
+                "height": "1.70",
+                "meeting": [
+                    {
+                        "date": "06-07-2022",
+                        "weight": "60"
+                    }
+                ],
+                "managerDaily": [
+                    {
+                        "meals": [
+                            "בננה"
+                        ],
+                        "date": "06-07-2022",
+                        "id": 1
+                    },
+                    {
+                        "meals": [
+                            "תפוח"
+                        ],
+                        "date": "06-07-2022",
+                        "id": 2
+                    }
+                ]
+            }
+        // }
+    // })
 }
 //get the data from the json file
 const getusersList = () => {
@@ -87,9 +122,7 @@ const getusersList = () => {
     }
 };
 
-getusersList();
-
-
+// getusersList();
 
 const Edit = document.querySelector('#Edit');
 const ShowEdit = document.getElementById('ShowEdit');
@@ -108,9 +141,9 @@ Edit.onclick = (e) => {
         <th>phone: <input type="text" id="phone" value=${currentUser.phone}></input></th>
         <th>email: <input type="text" id="mail" value=${currentUser.email}></input></th>
         <th>height: <input type="text" id="height" value=${currentUser.height}></input></th>
-        <th>weight: <input type="text" id="weight" value=${currentUser.weight[currentUser.weight.length - 1]}></input></th>
         <th><button type="submit" id="save" value="save changea">save changes</button></th>
     </tr>`
+    // <th>weight: <input type="text" id="weight" value=${currentUser.weight[currentUser.weight.length - 1]}></input></th>
     ShowEdit.innerHTML += table;
     const btnSave = document.getElementById('save');
     const firstname = document.getElementById('first');
@@ -132,7 +165,7 @@ Edit.onclick = (e) => {
         currentUser.phone = phone.value;
         currentUser.mail = mail.value;
         currentUser.height = height.value;
-        currentUser.weight = weight.value;
+        // currentUser.weight = weight.value;
         console.log(currentUser)
         fetch(`http://localhost:3000/users/${userURL}`, {
             method: `PATCH`,
