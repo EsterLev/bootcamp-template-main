@@ -41,57 +41,52 @@ ShowUser = (user) => {
     }
 }
 
-getJson = () =>{
-    fetch(`http://localhost:3000/`)
-    .then(response => {
-        console.log(response);
-        return response.json();
-    }).then(data => {
-        usersList.manager = data.manager;
-        usersList.users = data.users;
-        getusersList();
-    });
+// getJson = () =>{
+//     fetch(`http://localhost:3000/`)
+//     .then(response => {
+//         console.log(response);
+//         return response.json();
+//     }).then(data => {
+//         usersList.manager = data.manager;
+//         usersList.users = data.users;
+//         getusersList();
+//     });
 
-}
+// }
 
-getJson();
+// getJson();
 //get the users from the json file
 const getusersList = () => {
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("GET", './users.json');
-    // xhr.send();
-    // xhr.onload = function () {
-    //     if (xhr.status != 200) {
-    //         alert(`Error ${xhr.status}: ${xhr.statusText}`);
-    //     } else {
-    //         usersList.users = JSON.parse(xhr.responseText).users;
-    //         usersList.manager = JSON.parse(xhr.responseText).manager;
-    
-    let table = '';
-    let num = 0;
-    usersList.users.forEach(user => {
-        num++;
-        console.log(user);
-        let table = '';
-        table += `
+    fetch(`http://localhost:5000/users`)
+        .then(response => {
+            // usersList.users = JSON.parse(xhr.responseText).users;
+            // usersList.manager = JSON.parse(xhr.responseText).manager;
+
+            let table = '';
+            let num = 0;
+            usersList.users.forEach(user => {
+                num++;
+                console.log(user);
+                let table = '';
+                table += `
              <tr>
                  <th>${user.firstName + ' ' + user.lastName}</th>
                  <th>${user.weight[user.weight.length - 1] / Math.sqrt(user.height)}</th><br/>
              </tr>`
-        //  <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
+                //  <th><button type="submit" id="moreDetails" class="${num}">more details</button></th>
 
-        const container = document.querySelector('.ShowUser');
-        container.innerHTML += table;
-        // const moreDetails = document.getElementById('moreDetails');
-        // moreDetails.onclick = () => {
-        //     usersList.users.forEach(u => {
-        //         if (parseInt(moreDetails.className) === u.id)
-        //             theCurrentUser(u.id);
-        //     })
-        //     window.location.href = './user.html?id=' + `${currentUser.id}`;
-        // }
-    })
-};
+                const container = document.querySelector('.ShowUser');
+                container.innerHTML += table;
+                // const moreDetails = document.getElementById('moreDetails');
+                // moreDetails.onclick = () => {
+                //     usersList.users.forEach(u => {
+                //         if (parseInt(moreDetails.className) === u.id)
+                //             theCurrentUser(u.id);
+                //     })
+                //     window.location.href = './user.html?id=' + `${currentUser.id}`;
+            })
+        })
+}
 
 let currentUser = "";
 theCurrentUser = (id) => {
@@ -171,8 +166,8 @@ AddUser = () => {
                 console.log(data);
             });
     }
-
 }
+
 
 u = false;
 ShowFilterUsers = (user) => {
