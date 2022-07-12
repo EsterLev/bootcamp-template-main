@@ -98,8 +98,9 @@ showDetails = (product) => {
 
 const creatTable = () => {
     let table = '';
+    console.log(productsArrFilter);
     container.innerHTML = '';
-    productsArr.forEach((product) => {
+    productsArrFilter.forEach((product) => {
         const div = document.createElement('div');
         const h2 = document.createElement('h2');
         h2.innerHTML = product.shmmitzrach;
@@ -114,26 +115,51 @@ const creatTable = () => {
     })
 }
 productsArr = '';
-SearchFoods.onsubmit = (e) => {
-    e.preventDefault();
-    const req = fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${search.value}`)
-    req.then(response => response.json())
-        .then(response => {
-            productsArr = response.result.records;
-            creatTable();
-        }
-        )
-        .catch(err => console.error(err));
-}
+let productsArrFilter = new Array();
 
-search.onchange=()=>{
-    e.preventDefault();
-    const req = fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&q=${search.value}`)
-    req.then(response => response.json())
-        .then(response => {
-            productsArr = response.result.records;
-            creatTable();
+const req = fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2`)
+req.then(response => response.json())
+    .then(response => {
+        productsArr = response.result.records;
+        console.log(productsArr.length);
+        console.log(productsArr);
+        // creatTable();
+    }
+    )
+    .catch(err => console.error(err));
+      
+      function popupClearAndHide() {
+        autocomplete_result.innerHTML = "";
+        autocomplete_result.style.display = "none";
+      }
+      
+      function updPopup() {
+        if(!autocomplete.value) {
+          popupClearAndHide();
+          return;
         }
-        )
-        .catch(err => console.error(err));
-}
+        let a = new RegExp("^" + autocomplete.value, "i");
+        productsArrFilter = new Array();
+        let c = false;
+        for(let x = 0, b = document.createDocumentFragment(), c = false; x < productsArr.length; x++) {
+          if(a.test(productsArr[x].shmmitzrach)) {
+            c = true;
+            // var d = document.createElement("p");
+            // d.innerText = productsArr[x].shmmitzrach;
+            // d.setAttribute("onclick", "autocomplete.value=this.innerText;autocomplete_result.innerHTML='';autocomplete_result.style.display='none';");
+            // b.appendChild(d);
+            productsArrFilter.push(productsArr[x]);
+          }
+        }
+        creatTable();
+        if(c == true) {
+          autocomplete_result.innerHTML = "";
+          autocomplete_result.style.display = "block";
+          autocomplete_result.appendChild(b);
+          return;
+        }
+        popupClearAndHide();
+      }
+      
+      autocomplete.addEventListener("keyup", updPopup);
+      autocomplete.addEventListener("change", updPopup);

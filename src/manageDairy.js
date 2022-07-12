@@ -12,18 +12,20 @@ const btnDate = document.getElementById('btnDate');
 
 
 
+
 const usersList = {
     manager: {},
     users: {},
 };
+let theUser = '';
+
 
 const getJson = () => {
-    fetch('./users.json')
+    fetch(`http://localhost:3000/users/${userURL}`)
         .then(response => {
             return response.json();
         }).then(data => {
-            usersList.users = data.users;
-            usersList.manager = data.manager;
+            theUser = data;
         })
 };
 
@@ -31,6 +33,7 @@ getJson();
 
 //shows the daily description
 showTheDaily = () => {
+
     usersList.users.forEach(user => {
         if (user.id === userURL && user.managerDaily.length > 0)
             user.managerDaily.forEach(day => {
@@ -46,151 +49,136 @@ showTheDaily = () => {
                     div.append(date);
                     show.append(div);
                 }
+// =======
+//     const div = document.createElement('div');
+//     theUser.managerDaily[0].days.forEach(day => {
+//         console.log(day);
+//         if (day !== null) {
+//             day.meals.forEach(meals => {
+//                 meals.meal.forEach(meal => {
+//                     const desc = document.createElement('span');
+//                     desc.innerHTML = meal + ' ';
+//                     div.append(desc);
+//                 })
+// >>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
             })
-    });
+        }
+        const date = document.createElement('span');
+        date.innerHTML = theUser.managerDaily[0].days[0].date;
+        div.append(date);
+        show.append(div);
+    })
 }
-
-
 
 btnshow.onclick = () => {
     showTheDaily();
 }
+const daily = [new Array()];
+const btnMeals = document.getElementById('btnMeals');
 
-const daily = new Array();
-const breakfast = new Array();
-const lunch = new Array();
-const dinner = new Array();
-const date = Date.now;
-daily.push(breakfast, lunch, dinner, date);
-
-
-// tryAdd=()=> {
-//     let text;
-//     let dateOfMeal = prompt("Please enter the date:", "Harry Potter");
-//     if (dateOfMeal == null || dateOfMeal == "") {
-//       text = "unvalid date";
-//     } else {
-//       text = "you chose " + dateOfMeal + "! what did you eat today?";
-
-//     }
-//     document.getElementById("trying").innerHTML = text;
-//   }
-//add the description of the food for each day
-// btnAdd.onclick = (e) => {
+// btnAddBreakfast.onclick = () => {
+//     const div = document.createElement('div');
 //     const desc = document.createElement('span');
 //     desc.innerHTML = "what you eat? give a description";
-//     const btnMeals=document.createElement('button');
-//     btnMeals.innerText="meals"
-//     div.append(btnMeals)   
-// }
-
-btnAddBreakfast.onclick = () => {
-    // // Get the modal
-    // var modal = document.getElementById("myModal");
-
-    // // Get the button that opens the modal
-    // var btn = document.getElementById("myBtn");
-
-    // // Get the <span> element that closes the modal
-    // var span = document.getElementsByClassName("close")[0];
-
-    // // When the user clicks the button, open the modal 
-    // btn.onclick = function () {
-    //     modal.style.display = "block";
-    // }
-
-    // // When the user clicks on <span> (x), close the modal
-    // span.onclick = function () {
-    //     modal.style.display = "none";
-    // }
-
-    // // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function (event) {
-    //     if (event.target == modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        daily[0].push(inputDesc.value);
-    }
-    // inputDate.onchange=()=>{
-    //     daily.push(inputDate.value);
-    // }
-    console.log(daily);
-}
-
-btnAddLunch.onclick = () => {
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        daily[1].push(inputDesc.value);
-    }
-    console.log(daily);
-}
-
-btnAddDinner.onclick = () => {
-    const div = document.createElement('div');
-    const desc = document.createElement('span');
-    desc.innerHTML = "what you eat? give a description";
-    const inputDesc = document.createElement('input');
-    inputDesc.type = "text";
-    inputDesc.id = "valueDesc";
-    div.append(desc);
-    div.append(inputDesc);
-    addFoods.append(div);
-    inputDesc.onchange = () => {
-        daily[2].push(inputDesc.value);
-    }
-    console.log(daily);
-}
-
-//creating description per meals
-// btnMeals.onclick=()=>{
-//     //meals
-//     const brekfest=document.createElement('span');
-//     inputDescription(brekfest)
-//     const lunch=document.createElement('span');
-//     inputDescription(lunch)
-//     const dinner=document.createElement('span');
-//     inputDescription(dinner)
-
-//     div.append(brekfest);
-//     div.append(lunch);
-//     div.append(dinner);
-
-//     addFoods.append(div);  
-
-//   }
-//fill the inputs for each meal
-// inputDescription = (e) => {
 //     const inputDesc = document.createElement('input');
 //     inputDesc.type = "text";
 //     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
 //     inputDesc.onchange = () => {
-//         daily.push(inputDesc.value);
+//         if (daily[0] === undefined)
+//             daily[0] = new Array();
+//         if (daily[0[0]] === undefined)
+//             daily[0[0]] = new Array();
+//         daily[0[0]].push(inputDesc.value);
 //     }
 //     // inputDate.onchange=()=>{
 //     //     daily.push(inputDate.value);
 //     // }
 //     console.log(daily);
-//     div.append(inputDesc);
 // }
+
+// btnAddLunch.onclick = () => {
+//     const div = document.createElement('div');
+//     const desc = document.createElement('span');
+//     desc.innerHTML = "what you eat? give a description";
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
+//     inputDesc.onchange = () => {
+//         daily[0[1]].push(inputDesc.value);
+//     }
+//     console.log(daily);
+// }
+
+// btnAddDinner.onclick = () => {
+//     const div = document.createElement('div');
+//     const desc = document.createElement('span');
+//     desc.innerHTML = "what you eat? give a description";
+//     const inputDesc = document.createElement('input');
+//     inputDesc.type = "text";
+//     inputDesc.id = "valueDesc";
+//     div.append(desc);
+//     div.append(inputDesc);
+//     addFoods.append(div);
+//     inputDesc.onchange = () => {
+//         daily[0[2]].push(inputDesc.value);
+//     }
+//     console.log(daily);
+// }
+
+const div = document.createElement('div');
+
+//creating description per meals
+btnMeals.onclick = () => {
+    //meals
+    const breakfest = document.createElement('span');
+    inputDescription(breakfest, 'breakfests')
+    const lunch = document.createElement('span');
+    inputDescription(lunch, 'lunch')
+    const dinner = document.createElement('span');
+    inputDescription(dinner, 'dinner')
+    div.append(breakfest);
+    div.append(lunch);
+    div.append(dinner);
+
+    addFoods.append(div);
+
+}
+//fill the inputs for each meal
+inputDescription = (span, desc) => {
+    const inputDesc = document.createElement('input');
+    inputDesc.type = "text";
+    inputDesc.id = "valueDesc";
+    inputDesc.onchange = () => {
+        if (desc === 'breakfests') {
+            console.log(daily[0]);
+            // daily[0]=new Array();
+            daily[0].push(inputDesc.value);
+        }
+        else {
+            if (desc === 'lunch') {
+                if (daily[1] === undefined)
+                    daily[1] = new Array();
+                daily[1].push(inputDesc.value);
+            }
+            else {
+                if (daily[2] === undefined)
+                    daily[2] = new Array();
+                daily[2].push(inputDesc.value);
+            }
+        }
+    }
+    // inputDate.onchange=()=>{
+    //     daily.push(inputDate.value);
+    // }
+    console.log(daily);
+    div.append(inputDesc);
+}
 
 
 //update date
@@ -205,18 +193,25 @@ btnDate.onclick = () => {
     div.append(inputDate);
     addFoods.append(div);
     inputDate.onchange = () => {
-        daily[3] = inputDate.value;
+        if (daily[0].date === undefined)
+            daily[0].date = Date.now;
+        daily[0].date = inputDate.value;
     }
 }
 
 btnSave.onclick = () => {
     console.log(userURL);
+<<<<<<< HEAD
+=======
+    if (daily[0].date === undefined)
+        daily[0].date = Date.now;
+>>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
     fetch(`http://localhost:3000/users/${userURL}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
         },
-        method: "PUT",
+        method: "PATCH",
 
         // Sending only the fields that to be updated
         body: JSON.stringify({
@@ -231,23 +226,11 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
+<<<<<<< HEAD
     daily = [new Array(), new Array(), new Array(), String];
+=======
+    daily = [new Array()];
+>>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
 }
-
-// saveInJson = (obj) => {
-//     console.log(obj);
-//     arrDairy.push(obj);
-//     console.log(arrDairy);
-//     fetch(`http://localhost:3000/users/${userURL}`, {
-//         method: `PATCH`,
-//         body: JSON.stringify({
-//             "dairy": arrDairy,
-//         }),
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//     }).then(response => console.log(response));
-//     arrDairy = [];
-// }
 
 

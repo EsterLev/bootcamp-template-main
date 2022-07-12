@@ -8,6 +8,7 @@
   },
   "users": [
     {
+<<<<<<< HEAD
       "user": {
         "id": 1,
         "firstName": "Shira",
@@ -84,6 +85,76 @@
           }
         ]
       }
+=======
+      "id": 1,
+      "firstName": "Shira",
+      "lastName": "Sharabani",
+      "address": {
+        "city": "Modiin-Ilit",
+        "street": "sd.yechzkel",
+        "number": "5"
+      },
+      "phone": "0556796376",
+      "email": "shirasharabani@gmail.com",
+      "height": "1.70",
+      "weight": [
+        60,
+        58,
+        56
+      ],
+      "managerDaily": [
+        [
+          "לחם"
+        ],
+        [
+          "אורז"
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "Esti",
+      "lastName": "Lev",
+      "address": {
+        "city": "Modiin-Ilit",
+        "street": "Netivot Hamishpat",
+        "number": "18"
+      },
+      "phone": "0583281357",
+      "email": "st3281357@gmail.com",
+      "height": "1.62",
+      "weight": [
+        60,
+        58,
+        56
+      ],
+      "managerDaily": [
+        {
+          "days": [
+            {
+              "meals": [
+                "תפוח"
+              ],
+              "date": "28-06-2022"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "firstName": "Tamar",
+      "lastName": "Lev",
+      "address": {
+        "city": "enter city",
+        "street": "Netivot Hamishpat",
+        "number": "enter number"
+      },
+      "phone": "0589742357",
+      "email": "enter mail address",
+      "height": "1.55",
+      "weight": "38",
+      "id": 3
+>>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
     }
   ]
 }

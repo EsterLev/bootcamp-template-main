@@ -34,13 +34,17 @@ loginBtn.onclick = () => {
         window.location.href = './manager.html';
     }
     else (usersList.users.forEach(u => {
+<<<<<<< HEAD
         if (u.user.id === parseInt(id)) {
             //צריך לשרשר פה את ה ID
+=======
+        if (u.id === parseInt(id)) {
+>>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
             flag = 1;
             window.location.href = './user.html?id=' + `${u.user.id}`;
         }
-        if (flag === 0) {
-            alert("not found try again");
-        }
     }))
+    if (flag === 0) {
+        alert("not found try again");
+    }
 }
