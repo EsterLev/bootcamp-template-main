@@ -71,5 +71,4 @@ async function get(mail, phone) {
         console.log(err)
     }
 }
-
-
+    

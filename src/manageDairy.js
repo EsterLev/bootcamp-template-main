@@ -62,13 +62,13 @@ showTheDaily = () => {
     //             })
 
             })
-        }
+        })
         const date = document.createElement('span');
         date.innerHTML = theUser.managerDaily[0].days[0].date;
         div.append(date);
         show.append(div);
-    })
-}
+    }
+
 
 btnshow.onclick = () => {
     showTheDaily();
@@ -230,5 +230,5 @@ btnSave.onclick = () => {
 
 
 
-}
+
 

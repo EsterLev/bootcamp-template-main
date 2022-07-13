@@ -47,7 +47,6 @@ const getusersList = () => {
         .then(response => {
             // usersList.users = JSON.parse(xhr.responseText).users;
             // usersList.manager = JSON.parse(xhr.responseText).manager;
-
             let table = '';
             let num = 0;
             usersList.users.forEach(user => {
@@ -67,9 +66,9 @@ const getusersList = () => {
         
             const container = document.querySelector('.ShowUser');
             container.innerHTML += table;
-        }
+        })
 }
-};
+
 
 let currentUser = "";
 theCurrentUser = (id) => {
