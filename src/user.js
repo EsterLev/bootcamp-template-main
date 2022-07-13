@@ -10,10 +10,7 @@ let Weight = "";
 
 printUser = document.querySelector('.ShowUser');
 
-const usersList = {
-    manager: {},
-    users: {},
-};
+let usersList;
 
 const searchURL = new URLSearchParams(location.search);
 const userURL = parseInt(searchURL.get('id'));
@@ -125,6 +122,7 @@ const getusersList = () => {
 
 // getusersList();
 
+//to edit the user
 const Edit = document.querySelector('#Edit');
 const ShowEdit = document.getElementById('ShowEdit');
 Edit.onclick = (e) => {
@@ -132,6 +130,7 @@ Edit.onclick = (e) => {
     let table = '';
     theCurrentUser();
     e.preventDefault();
+    console.log()
     table += `
     <tr>
         <th>first name: <input type="text" id="first" value=${currentUser.firstName}></input></th>
@@ -160,12 +159,12 @@ Edit.onclick = (e) => {
     const mail = document.getElementById('mail');
     const height = document.getElementById('height');
     const weight = document.getElementById('weight');
-
-    btnSave.onclick = () => {
+//save the changes
+    btnSave.onclick = async () => {
         currentUser.firstName = firstname.value;
         currentUser.lastName = lastname.value;
         currentUser.address.city = city.value;
-        //currentUser.address.street = street.value;
+        // currentUser.address.street = street.value;
         currentUser.address.number = number.value;
         currentUser.phone = phone.value;
         currentUser.mail = mail.value;

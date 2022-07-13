@@ -29,7 +29,7 @@ loginBtn.onsubmit = () => {
             //צריך לשרשר פה את ה ID
             flag = 1;
             window.location.href = './user.html?id=' + `${u.user.id}`;
-
+        }
     user = get(mail, phoneV);
     // user = getUser(mail, phoneV);
     if (user !== undefined) {
@@ -44,6 +44,7 @@ loginBtn.onsubmit = () => {
     else {
         alert("not found try again");
     }
+
 }
 
 
