@@ -49,18 +49,18 @@ showTheDaily = () => {
                     div.append(date);
                     show.append(div);
                 }
-// =======
-//     const div = document.createElement('div');
-//     theUser.managerDaily[0].days.forEach(day => {
-//         console.log(day);
-//         if (day !== null) {
-//             day.meals.forEach(meals => {
-//                 meals.meal.forEach(meal => {
-//                     const desc = document.createElement('span');
-//                     desc.innerHTML = meal + ' ';
-//                     div.append(desc);
-//                 })
-// >>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
+
+    // const div = document.createElement('div');
+    // theUser.managerDaily[0].days.forEach(day => {
+    //     console.log(day);
+    //     if (day !== null) {
+    //         day.meals.forEach(meals => {
+    //             meals.meal.forEach(meal => {
+    //                 const desc = document.createElement('span');
+    //                 desc.innerHTML = meal + ' ';
+    //                 div.append(desc);
+    //             })
+
             })
         }
         const date = document.createElement('span');
@@ -201,11 +201,6 @@ btnDate.onclick = () => {
 
 btnSave.onclick = () => {
     console.log(userURL);
-<<<<<<< HEAD
-=======
-    if (daily[0].date === undefined)
-        daily[0].date = Date.now;
->>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
     fetch(`http://localhost:3000/users/${userURL}`, {
         headers: {
             Accept: "application/json",
@@ -226,11 +221,14 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
-<<<<<<< HEAD
+
     daily = [new Array(), new Array(), new Array(), String];
-=======
+
     daily = [new Array()];
->>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
+
 }
 
+
+
+}
 

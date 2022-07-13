@@ -117,13 +117,12 @@ const creatTable = () => {
 productsArr = '';
 let productsArrFilter = new Array();
 
-const req = fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2`)
+const req = fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=c3cb0630-0650-46c1-a068-82d575c094b2&limit=4633")
+
 req.then(response => response.json())
     .then(response => {
         productsArr = response.result.records;
         console.log(productsArr.length);
-        console.log(productsArr);
-        // creatTable();
     }
     )
     .catch(err => console.error(err));
@@ -144,10 +143,6 @@ req.then(response => response.json())
         for(let x = 0, b = document.createDocumentFragment(), c = false; x < productsArr.length; x++) {
           if(a.test(productsArr[x].shmmitzrach)) {
             c = true;
-            // var d = document.createElement("p");
-            // d.innerText = productsArr[x].shmmitzrach;
-            // d.setAttribute("onclick", "autocomplete.value=this.innerText;autocomplete_result.innerHTML='';autocomplete_result.style.display='none';");
-            // b.appendChild(d);
             productsArrFilter.push(productsArr[x]);
           }
         }

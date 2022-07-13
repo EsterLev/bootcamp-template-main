@@ -43,16 +43,13 @@ ShowUser = (user) => {
 
 //get the users from the json file
 const getusersList = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", './users.json');
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
+    fetch(`http://localhost:5000/users`)
+        .then(response => {
+            // usersList.users = JSON.parse(xhr.responseText).users;
+            // usersList.manager = JSON.parse(xhr.responseText).manager;
+
             let table = '';
+            let num = 0;
             usersList.users.forEach(user => {
                 console.log(user);
                 table += `
@@ -67,11 +64,11 @@ const getusersList = () => {
             //  }
             })
            
-
+        
             const container = document.querySelector('.ShowUser');
             container.innerHTML += table;
         }
-    }
+}
 };
 
 let currentUser = "";
@@ -79,7 +76,7 @@ theCurrentUser = (id) => {
     usersList.users.forEach(u => {
         if (u.id === id) {
             currentUser = u;
-            console.log(currentUser);
+            console.log("the current" + currentUser);
         }
     })
 
@@ -130,6 +127,7 @@ AddUser = () => {
 
 filterUsers = new Array();
 const form = document.getElementById('form');
+
 //pushing to the products id
 AddUser = () => {
     form.innerHTML = '';
@@ -140,13 +138,13 @@ AddUser = () => {
             <th><input type="text" id="first" value="enter first name"></input></th>
             <th><input type="text" id="last" value="enter last name"></input></th>
             <th><input type="text" id="city" value="enter city"></input></th>
-            <th><input type="text id="street" value="enter street"></input></th>
+            <th><input type="number id="street" value="enter street"></input></th>
             <th><input type="text" id="number" value="enter number"></input></th>
             <th><input type="text" id="phone" value="enter phone number"></input></th>
             <th><input type="text" id="mail" value="enter mail address"></input></th>
-            <th><input type="text" id="height" value="enter height"></input></th>
-            <th><input type="text" id="weight" value="enter weight"></input></th>
-            <th><button type="submit" id="save" value="save changea"></button></th>
+            <th><input type="number" id="height" value="enter height"></input></th>
+            <th><input type="number" id="weight" value="enter weight"></input></th>
+            <th><button type="submit" id="save">save changea</button></th>
         </tr>`
     form.innerHTML += table;
     const btnSave = document.getElementById('save');
@@ -161,7 +159,6 @@ AddUser = () => {
     const weight = document.getElementById('weight');
 
     btnSave.onclick = () => {
-        console.log(currentUser);
         currentUser = new Object();
         currentUser.firstName = firstname.value;
         currentUser.lastName = lastname.value;
@@ -203,20 +200,26 @@ AddUser = () => {
         currentUser.weight = new Array();
         currentUser.weight.push(weight.value);
         currentUser.id = usersList.users.length + 1;
-        //console.log(currentUser)
+        currentUser.weight = weight.value;
+        console.log(currentUser)
         fetch(`http://localhost:3000/users/`, {
-            method: `POST`,
-            body: JSON.stringify(currentUser),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+
+            // Sending only the fields that to be updated
+            body: JSON.stringify({
+                user: currentUser.user
             })
-            .catch((error) => {
-                console.error('Error:', error);
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
             });
     }
 }
@@ -366,27 +369,18 @@ const citySearch = document.querySelector('#lastNameSearch');
 const streetSearch = document.querySelector('#streetSearch');
 const numberSearch = document.querySelector('#numberSearch');
 
-
 //keeps the data in a global variable
 const usersList = {
     manager: {},
     users: {},
 };
 
-getusersList();
-
-
 showUserById.onclick = () => {
-    let id = idShow.value;
+    let idUser = parseInt(idShow.value);
     usersList.users.forEach(u => {
-        if (u.id === parseInt(id)) {
-            flag = 1;
-            window.location.href = './user.html?id=' + `${u.id}`;
-            console.log(window.location.href);
-        }
+        if (idUser === u.id)
+            window.location.href = `./user.html?id=` + `${idUser}`;
     })
-    if (flag === 0)
-        alert('you have error');
 }
 
 searchBtn.onclick = () => {
@@ -406,10 +400,13 @@ searchBtn.onclick = () => {
     }
 }
 
+//add user
+
 btnAdd.onclick = () => {
     AddUser();
 }
 
+const idDelete = document.querySelector('#idDelete');
 
 //add user
 

@@ -1,50 +1,75 @@
 const loginBtn = document.querySelector('#enter');
-const loginInput = document.querySelector('#login');
+const email = document.querySelector('#mail');
+const phone = document.querySelector('#phone');
 
-const usersList = {
-    manager: {},
-    users: {},
-};
+// const usersList = {
+//     manager: {},
+//     users: {},
+// };
 
-//get the data from the json file
-const getusersList = () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", './users.json');
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-            usersList.users = JSON.parse(xhr.responseText).users;
-            usersList.manager = JSON.parse(xhr.responseText).manager;
-            console.log(usersList.manager);
-        }
-    }
-};
+// //get the data from the json file
+// const getUser = (mail, phone) => {
+//     fetch(`http://localhost:3000/login/`)
+//     .then(response => {
+//         console.log(response);
+//         //  usersList.users = response.users; usersList.manager = response.manager; 
+//         })
+// }
 
-getusersList();
 
-loginBtn.onclick = () => {
-    id = loginInput.value;
-    if (id === undefined)
+loginBtn.onsubmit = () => {
+    mail = email.value;
+    phoneV = phone.value;
+    if (mail === undefined || phoneV === undefined) {
         alert("you not enter anything");
-    let flag = 0;
-    if (usersList.manager.id === parseInt(id)) {
-        flag = 1;
-        window.location.href = './manager.html';
     }
+
     else (usersList.users.forEach(u => {
-<<<<<<< HEAD
         if (u.user.id === parseInt(id)) {
             //צריך לשרשר פה את ה ID
-=======
-        if (u.id === parseInt(id)) {
->>>>>>> 276e8370c6de6cf1a51a0df002eb508cc911d335
             flag = 1;
             window.location.href = './user.html?id=' + `${u.user.id}`;
+
+    user = get(mail, phoneV);
+    // user = getUser(mail, phoneV);
+    if (user !== undefined) {
+        if (user.id === '212') {
+            window.location.href = './manager.html';
         }
-    }))
-    if (flag === 0) {
+        else {
+            window.location.href = './user.html?id=' + `${u.id}`;
+
+        }
+    }
+    else {
         alert("not found try again");
     }
 }
+
+
+async function get(mail, phone) {
+    try {
+
+        const resp = await fetch('http://localhost:3000/login', { 
+            method: 'POST',
+            mode: "cors",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json ',
+                'Accept': 'application/json',
+                "Access-Control-Origin": "*"
+            },
+            body: JSON.stringify(mail, phone)
+        })
+        console.log(resp)
+
+        console.log(resp.body)
+        resp.headers.forEach(console.log);
+
+        return JSON.stringify(resp);
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
