@@ -10,7 +10,15 @@ const userURL = parseInt(searchURL.get('id'));
 const btnshow = document.getElementById('btnshow');
 const btnDate = document.getElementById('btnDate');
 
+
+
+
+const usersList = {
+    manager: {},
+    users: {},
+};
 let theUser = '';
+
 
 const getJson = () => {
     fetch(`http://localhost:3000/users/${userURL}`)
@@ -25,24 +33,42 @@ getJson();
 
 //shows the daily description
 showTheDaily = () => {
-    const div = document.createElement('div');
-    theUser.managerDaily[0].days.forEach(day => {
-        console.log(day);
-        if (day !== null) {
-            day.meals.forEach(meals => {
-                meals.meal.forEach(meal => {
-                    const desc = document.createElement('span');
-                    desc.innerHTML = meal + ' ';
-                    div.append(desc);
-                })
+
+    usersList.users.forEach(user => {
+        if (user.id === userURL && user.managerDaily.length > 0)
+            user.managerDaily.forEach(day => {
+                const div = document.createElement('div');
+                if (day !== null && day.length > 0) {
+                    day.p.forEach(f => {
+                        const desc = document.createElement('span');
+                        desc.innerHTML = f + ' ';
+                        div.append(desc);
+                    })
+                    const date = document.createElement('span');
+                    date.innerHTML = day.date;
+                    div.append(date);
+                    show.append(div);
+                }
+
+    // const div = document.createElement('div');
+    // theUser.managerDaily[0].days.forEach(day => {
+    //     console.log(day);
+    //     if (day !== null) {
+    //         day.meals.forEach(meals => {
+    //             meals.meal.forEach(meal => {
+    //                 const desc = document.createElement('span');
+    //                 desc.innerHTML = meal + ' ';
+    //                 div.append(desc);
+    //             })
+
             })
-        }
+        })
         const date = document.createElement('span');
         date.innerHTML = theUser.managerDaily[0].days[0].date;
         div.append(date);
         show.append(div);
-    })
-}
+    }
+
 
 btnshow.onclick = () => {
     showTheDaily();
@@ -175,8 +201,6 @@ btnDate.onclick = () => {
 
 btnSave.onclick = () => {
     console.log(userURL);
-    if (daily[0].date === undefined)
-        daily[0].date = Date.now;
     fetch(`http://localhost:3000/users/${userURL}`, {
         headers: {
             Accept: "application/json",
@@ -197,5 +221,14 @@ btnSave.onclick = () => {
         .then(function (data) {
             console.log(data);
         });
+
+    daily = [new Array(), new Array(), new Array(), String];
+
     daily = [new Array()];
+
 }
+
+
+
+
+

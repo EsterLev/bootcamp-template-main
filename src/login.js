@@ -1,42 +1,75 @@
 const loginBtn = document.querySelector('#enter');
-const emailI = document.querySelector('#mail');
-const phoneI = document.querySelector('#phone');
+const email = document.querySelector('#mail');
+const phone = document.querySelector('#phone');
+
+// const usersList = {
+//     manager: {},
+//     users: {},
+// };
+
+// //get the data from the json file
+// const getUser = (mail, phone) => {
+//     fetch(`http://localhost:3000/login/`)
+//     .then(response => {
+//         console.log(response);
+//         //  usersList.users = response.users; usersList.manager = response.manager; 
+//         })
+// }
+
 
 loginBtn.onsubmit = () => {
-    email = emailI.value;
-    phone = phoneI.value;
-    if (email === "" || phone === "") {
-        alert("you not enter something");
+    mail = email.value;
+    phoneV = phone.value;
+    if (mail === undefined || phoneV === undefined) {
+        alert("you not enter anything");
     }
-    obj = { email, phone};
-    user = login(obj);
+
+    else (usersList.users.forEach(u => {
+        if (u.user.id === parseInt(id)) {
+            //צריך לשרשר פה את ה ID
+            flag = 1;
+            window.location.href = './user.html?id=' + `${u.user.id}`;
+        }
+    user = get(mail, phoneV);
+    // user = getUser(mail, phoneV);
     if (user !== undefined) {
         if (user.id === '212') {
             window.location.href = './manager.html';
         }
         else {
-            window.location.href = './user.html?id=' + `${user.id}`;
+            window.location.href = './user.html?id=' + `${u.id}`;
+
         }
     }
     else {
         alert("not found try again");
     }
+    })
 }
 
-window.location.href = './manager.html';
 
-login = async (obj) => {
-    console.log(obj);
-    const response =  await fetch(`http://localhost:3000/login`, {
-        method: `POST`,
-        body: JSON.stringify({
-            obj
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    });
-    console.log(response);
-    const user = response.json();
-    return user[0];
+async function get(mail, phone) {
+    try {
+
+        const resp = await fetch('http://localhost:3000/login', { 
+            method: 'POST',
+            mode: "cors",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json ',
+                'Accept': 'application/json',
+                "Access-Control-Origin": "*"
+            },
+            body: JSON.stringify(mail, phone)
+        })
+        console.log(resp)
+
+        console.log(resp.body)
+        resp.headers.forEach(console.log);
+
+        return JSON.stringify(resp);
+    } catch (err) {
+        console.log(err)
+    }
 }
+    
