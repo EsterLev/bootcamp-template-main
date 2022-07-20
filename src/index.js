@@ -75,7 +75,7 @@ AddUser = () => {
     const height = document.getElementById('height');
     const weight = document.getElementById('weight');
 
-    btnSave.onclick = () => {
+    btnSave.onclick = async () => {
         currentUser = new Object();
         currentUser.firstName = firstname.value;
         currentUser.lastName = lastname.value;
@@ -86,16 +86,18 @@ AddUser = () => {
         currentUser.phone = phone.value;
         currentUser.mail = mail.value;
         currentUser.height = height.value;
-        currentUser.id = usersList.users.length + 1;
+        currentUser.id = usersList.length + 1;
         currentUser.weight = weight.value;
         console.log(currentUser)
-        fetch(`http://localhost:3000/users`, {
+        const res = await fetch(`http://localhost:3000/users`, {
             method: `POST`,
             body: JSON.stringify(currentUser),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
+        console.log(res.status);
+        getusersList();
     }
 }
 
