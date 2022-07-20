@@ -136,7 +136,7 @@ AddUser = () => {
     const height = document.getElementById('height');
     const weight = document.getElementById('weight');
 
-    btnSave.onclick = () => {
+    btnSave.onclick = async () => {
         currentUser = new Object();
         currentUser.firstName = firstname.value;
         currentUser.lastName = lastname.value;
@@ -149,38 +149,6 @@ AddUser = () => {
         currentUser.mail = mail.value;
         currentUser.height = height.value;
 
-        console.log(currentUser)
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-
-            // Sending only the fields that to be updated
-            body: JSON.stringify({
-                user: currentUser
-            })
-        })
-            .then(function (response) {
-                console.log(response);
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            });
-    }
-
-}
-
-//show the filter users results
-
-        currentUser.weight = new Array();
-        currentUser.weight.push(weight.value);
-        currentUser.id = usersList.users.length + 1;
-        currentUser.weight = weight.value;
-        console.log(currentUser)
-        fetch(`http://localhost:3000/users/`, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json"
@@ -192,30 +160,7 @@ AddUser = () => {
                 user: currentUser.user
             })
         })
-            .then(function (response) {
-                console.log(response);
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            });
-    }
-}
 
-
-
-u = false;
-ShowFilterUsers = (user) => {
-    if (this.filterUsers.length !== 0) {
-        this.filterUsers.foreach(us => {
-            if (us.id === user.id)
-                u = true;
-        });
-        if (u === false)
-            this.filterUsers.push(user);
-    }
-    else {
-        this.filterUsers.push(user);
     }
 }
 

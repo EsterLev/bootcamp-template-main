@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <h1>Manager:</h1>
+    <div class="ShowUser"></div>
+    <form id="form" class="form">
+        <label>enter first_name</label><input type="text" name="first_name" id="first_name" required><br />
+        <label>enter last_name</label><input type="text" name=" last_name" id=" last_name" required><br />
+        <label>enter address</label><br />
+        <label>enter city</label><input type="text" name="city" id="city" required><br />
+        <label>enter street</label><input type="text" name="street" id="street" required><br />
+        <label>enter BuildingNumber</label><input type="number" name="BuildingNumber" id="BuildingNumber"
+            required><br />
+        <label>enter phone</label><input type="text" name="phone" id="phone" required><br />
+        <label>enter email</label><input type="text" name="email" id="email" required><br />
+        <label>enter height</label><input type="text" name="height" id="height" required><br />
+        <label>enter start_weight</label><input type="weight" name="weight" id="weight" required><br />
+        <button id="btnAdd" type="submit">add user</button><br />
+        <button id="btnUpdate" type="submit">update user</button><input type="number" id="id"><br />
+        <button id="btnDelete" type="submit">delete user</button><input type="number" id="idDelete"><br />
+        <button id="showUserById" type="submit">to show user details</button>enter id<input type="number"
+            id="idShow"><br />
+    </form>
+    <div id="search">
+        <p>חיפוש</p><br />
+        <input type="radio" id="firstName">id</input><br />
+        <input type="text" id="idSearch"><br />
+        <input type="radio" id="firstName">first name</input><br />
+        <input type="text" id="firstNameSearch"><br />
+        <input type="radio" id="lastNameSearch">last name</input><br />
+        <input type="text" id="lastNameSearch"><br />
+        <input type="radio" id="address">address</input><br />
+        <input type="text" id="citySearch"><br />
+        <input type="text" id="streetSearch"><br />
+        <input type="text" id="numberSearch"><br />
+        <button id="searchBtn" type="submit">search</button><br />
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
