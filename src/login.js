@@ -44,7 +44,7 @@ loginBtn.onsubmit = () => {
     else {
         alert("not found try again");
     }
-
+    })
 }
 
 

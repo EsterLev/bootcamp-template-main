@@ -11,7 +11,7 @@ const getusersList = async () => {
 
 //get the users from the json file
 const getusersList = () => {
-    fetch(`http://localhost:5000/users`)
+    fetch(`http://localhost:3000/users`)
         .then(response => {
             // usersList.users = JSON.parse(xhr.responseText).users;
             // usersList.manager = JSON.parse(xhr.responseText).manager;
