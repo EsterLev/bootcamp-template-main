@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/chanakamin/bootcamp-template#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "eslint": "^8.17.0",
     "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
   }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <h1>Manager:</h1>
+    <div class="ShowUser"></div>
+    <form id="form" class="form">
+        <button id="btnAdd" type="submit">add user</button><br />
+        <button id="btnUpdate" type="submit">update user</button><br /><input type="number" id="id"><br />
+        <button id="btnDelete" type="submit">delete user</button><br /><input type="number" id="idDelete"><br />
+        <button id="showUserById" type="submit">to show user details</button><br />enter id<input type="number"
+            id="idShow"><br />
+    </form>
+    <div id="search">
+        <p>חיפוש</p><br />
+        <input type="radio" id="id">id</input><br />
+        <input type="text" id="idSearch"><br />
+        <input type="radio" id="firstName">first name</input><br />
+        <input type="text" id="firstNameSearch"><br />
+        <input type="radio" id="lastName">last name</input><br />
+        <input type="text" id="lastNameSearch"><br />
+        <input type="radio" id="address">address</input><br />
+        <input type="text" id="citySearch"><br />
+        <input type="text" id="streetSearch"><br />
+        <input type="text" id="numberSearch"><br />
+        <button id="searchBtn" type="submit">search</button><br />
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
