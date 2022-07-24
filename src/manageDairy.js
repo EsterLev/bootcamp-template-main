@@ -21,7 +21,7 @@ let theUser = '';
 
 
 const getJson = () => {
-    fetch(`http://localhost:3000/users/${userURL}`)
+    fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`)
         .then(response => {
             return response.json();
         }).then(data => {
@@ -201,7 +201,11 @@ btnDate.onclick = () => {
 
 btnSave.onclick = () => {
     console.log(userURL);
-    fetch(`http://localhost:3000/users/${userURL}`, {
+
+    if (daily[0].date === undefined)
+        daily[0].date = Date.now;
+    fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`, {
+
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json"

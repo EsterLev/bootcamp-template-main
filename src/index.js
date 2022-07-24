@@ -4,7 +4,7 @@ const getusersList = async () => {
     //     .then(response => {
     // usersList.users = JSON.parse(xhr.responseText).users;
     // usersList.manager = JSON.parse(xhr.responseText).manager;
-    const response = await fetch(`http://localhost:3000/users`,
+    const response = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users`,
         { method: 'GET' })
     const users = await response.json();
     usersList = users;
@@ -32,7 +32,7 @@ const getusersList = async () => {
 getusersList();
 let currentUser = "";
 theCurrentUser = async (id) => {
-    const response = await fetch(`http://localhost:3000/users/${id}`,
+    const response = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${id}`,
         { method: 'GET' })
     const user = await response.json();
     currentUser = user[0];
@@ -82,7 +82,7 @@ AddUser = () => {
         currentUser.id = usersList.length + 1;
         currentUser.weight = weight.value;
         console.log(currentUser)
-        const res = await fetch(`http://localhost:3000/users`, {
+        const res = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users`, {
             method: `POST`,
             body: JSON.stringify(currentUser),
             headers: {
@@ -124,7 +124,7 @@ deleteUser = (id) => {
     console.log(usersList.users)
     usersList.users.forEach(d => {
         if (d.id == id) {
-            fetch(`http://localhost:3000/users/${id}`,
+            fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${id}`,
                 { method: 'DELETE' })
                 .then(() => console.log('Delete successful'));
         }
@@ -162,33 +162,33 @@ showUserById.onclick = () => {
 }
 searchBtn.onclick = () => {
     if (id.checked) {
-        fetch(`http://localhost:3000/users/${idSearch.value}`,
+        fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${idSearch.value}`,
             { method: 'GET' })
             .then(() => console.log('get successful'));
     }
     if (firstName.checked) {
-        fetch(`http://localhost:3000/users/${firstNameSearch.value}`,
+        fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${firstNameSearch.value}`,
             { method: 'GET' })
             .then(() => console.log('get successful'));
     }
     if (lastName.checked) {
-        fetch(`http://localhost:3000/users/${lastNameSearch.value}`,
+        fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${lastNameSearch.value}`,
             { method: 'GET' })
             .then(() => console.log('get successful'));
     }
     if (address.checked) {
         if (citySearch.value) {
-            fetch(`http://localhost:3000/users/${citySearch.value}`,
+            fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${citySearch.value}`,
                 { method: 'GET' })
                 .then(() => console.log('get successful'));
         }
         if (streetSearch.value) {
-            fetch(`http://localhost:3000/users/${streetSearch.value}`,
+            fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${streetSearch.value}`,
                 { method: 'GET' })
                 .then(() => console.log('get successful'));
         }
         if (numberSearch.value) {
-            fetch(`http://localhost:3000/users/${numberSearch.value}`,
+            fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${numberSearch.value}`,
                 { method: 'GET' })
                 .then(() => console.log('get successful'));
         }

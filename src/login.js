@@ -27,7 +27,7 @@ window.location.href = './manager.html';
 
 login = async (obj) => {
     console.log(obj);
-    const response =  await fetch(`http://localhost:3000/login`, {
+    const response =  await fetch(`https://shrouded-escarpment-42635.herokuapp.com/login`, {
         method: `POST`,
         body: JSON.stringify({
             obj

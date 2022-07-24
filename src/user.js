@@ -1,5 +1,4 @@
 let id;
-
 let FirstName = "";
 let LastName = "";
 let Address = "";
@@ -15,6 +14,7 @@ let usersList;
 const searchURL = new URLSearchParams(location.search);
 const userURL = parseInt(searchURL.get('id'));
 let currentUser = "";
+
 theCurrentUser = () => {
     // usersList.users.forEach(u => {
         // if (u.id === userURL) {
@@ -56,6 +56,14 @@ theCurrentUser = () => {
             }
         // }
     // })
+
+
+//get the user from the json file
+theCurrentUser = async () => {
+    const response = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`,
+        { method: 'GET' })
+    const user = await response.json();
+    currentUser = user[0];
 }
 //get the data from the json file
 const getusersList = () => {
@@ -169,12 +177,15 @@ Edit.onclick = (e) => {
         currentUser.phone = phone.value;
         currentUser.mail = mail.value;
         currentUser.height = height.value;
+
         // currentUser.weight = weight.value;
         console.log(currentUser)
 
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        
 
-        fetch(`http://localhost:3000/users/${userURL}`, {
+        currentUser.weight = weight.value;
+        const response =  await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`, {
+
             method: `PATCH`,
             // Sending only the fields that to be updated
             body: JSON.stringify({
