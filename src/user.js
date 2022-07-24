@@ -8,7 +8,7 @@ let currentUser = "";
 
 //get the user from the json file
 theCurrentUser = async () => {
-    const response = await fetch(`http://localhost:3000/users/${userURL}`,
+    const response = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`,
         { method: 'GET' })
     const user = await response.json();
     currentUser = user[0];
@@ -109,7 +109,7 @@ Edit.onclick = (e) => {
         currentUser.mail = mail.value;
         currentUser.height = height.value;
         currentUser.weight = weight.value;
-        const response =  await fetch(`http://localhost:3000/users/${userURL}`, {
+        const response =  await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${userURL}`, {
             method: `PATCH`,
             // Sending only the fields that to be updated
             body: JSON.stringify({
