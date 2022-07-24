@@ -8,7 +8,6 @@ const getusersList = async () => {
         { method: 'GET' })
     const users = await response.json();
     usersList = users;
-
     let table = '';
     usersList.forEach(user => {
         let table = '';
@@ -30,9 +29,7 @@ const getusersList = async () => {
         // })
     })
 }
-
 getusersList();
-
 let currentUser = "";
 theCurrentUser = async (id) => {
     const response = await fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${id}`,
@@ -40,11 +37,8 @@ theCurrentUser = async (id) => {
     const user = await response.json();
     currentUser = user[0];
 }
-
 filterUsers = new Array();
-
 const form = document.getElementById('form');
-
 //pushing to the products id
 AddUser = () => {
     form.innerHTML = '';
@@ -74,7 +68,6 @@ AddUser = () => {
     const mail = document.getElementById('mail');
     const height = document.getElementById('height');
     const weight = document.getElementById('weight');
-
     btnSave.onclick = async () => {
         currentUser = new Object();
         currentUser.firstName = firstname.value;
@@ -100,7 +93,6 @@ AddUser = () => {
         getusersList();
     }
 }
-
 printUsersFilter = () => {
     const container = document.querySelector('.ShowUser');
     container.innerHTML = '';
@@ -114,7 +106,6 @@ printUsersFilter = () => {
     })
     container.innerHTML += table;
 }
-
 printUsers = () => {
     let table = '';
     usersList.users.forEach(user => {
@@ -128,7 +119,6 @@ printUsers = () => {
     const container = document.querySelector('.ShowUser');
     container.innerHTML += table;
 }
-
 deleteUser = (id) => {
     console.log("before deleting")
     console.log(usersList.users)
@@ -142,7 +132,6 @@ deleteUser = (id) => {
     console.log("after deleting")
     console.log(usersList.users)
 }
-
 const btnAdd = document.querySelector('#btnAdd');
 const btnDelete = document.querySelector('#btnDelete');
 const btnUpdate = document.querySelector('#btnUpdate');
@@ -152,7 +141,6 @@ const showUserById = document.querySelector('#showUserById');
 const idShow = document.querySelector('#idShow');
 const showAll = document.querySelector('#showAllUsers')
 const searchBtn = document.querySelector("#searchBtn");
-
 const firstNameSearch = document.querySelector('#firstNameSearch');
 const firstName = document.querySelector('#firstName');
 const idSearch = document.querySelector('#idSearch');
@@ -163,10 +151,8 @@ const address = document.querySelector('#address');
 const citySearch = document.querySelector('#lastNameSearch');
 const streetSearch = document.querySelector('#streetSearch');
 const numberSearch = document.querySelector('#numberSearch');
-
 //keeps the data in a global variable
 let usersList;
-
 showUserById.onclick = () => {
     let idUser = parseInt(idShow.value);
     usersList.users.forEach(u => {
@@ -174,7 +160,6 @@ showUserById.onclick = () => {
             window.location.href = `./user.html?id=` + `${idUser}`;
     })
 }
-
 searchBtn.onclick = () => {
     if (id.checked) {
         fetch(`https://shrouded-escarpment-42635.herokuapp.com/users/${idSearch.value}`,
@@ -207,19 +192,14 @@ searchBtn.onclick = () => {
                 { method: 'GET' })
                 .then(() => console.log('get successful'));
         }
-
         this.printUsersFilter();
     }
 }
-
 //add user
-
 btnAdd.onclick = () => {
     AddUser();
 }
-
 const idDelete = document.querySelector('#idDelete');
-
 btnDelete.onclick = () => {
     let id = idDelete.value;
     console.log(id);
